@@ -13,6 +13,10 @@ function Login({navigation}) {
       <View>
         <View style={{flexDirection: 'row'}}>
           <Text style={loginStyle.title}>아이디</Text>
+          {
+            response === false ? <Text style={loginStyle.loginError}>로그인에 실패하였습니다.</Text>
+            : null
+          }
         </View>
         <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} style={loginStyle.form} />
         <Text style={loginStyle.title}>비밀번호</Text>
