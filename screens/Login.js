@@ -1,13 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 
 function Login({navigation}) {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [btnStyle, setBtnStyle] = useState(loginStyle.btn);
+
+
+  useEffect(() => {
+    (id !== "") && (pw !== "") 
+    ? setBtnStyle(loginStyle.active) 
+    : setBtnStyle(loginStyle.btn)
+  }, [id, pw])
 
   // TODO: 서버 통신
-  let response = false;
+  const [response, setResponse] = useState(true);
+  let server = false;
   
+  const requestLogin = () => {
+    server === false ? setResponse(false) : successLogin();
+  }
+
+  const successLogin = () => {
+    setResponse(true);
+    navigation.navigate('Main');
+  }
+    
   return (
     <View style={loginStyle.container}>
       <View>
@@ -23,7 +41,7 @@ function Login({navigation}) {
         <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} secureTextEntry={true} style={loginStyle.form} />
       </View>
       <View>
-        <TouchableOpacity onPress={() => {navigation.navigate('Main')}}>
+        <TouchableOpacity onPress={() => requestLogin()}>
           <Text style={(id !== '' && pw !== '') ? loginStyle.active : loginStyle.btn}>로그인</Text>
         </TouchableOpacity>
       </View>
@@ -53,8 +71,8 @@ const loginStyle = StyleSheet.create({
   title: {
     padding: 10,
     paddingLeft: 0,
-    paddingBottom: 5,
-    marginTop: 10,
+    paddingBottom: 2.5,
+    marginTop: 5,
     color: '#999999',
     fontWeight: 'bold',
   },
@@ -95,8 +113,8 @@ const loginStyle = StyleSheet.create({
     flex: 1,
     padding: 10,
     paddingLeft: 0,
-    paddingBottom: 5,
-    marginTop: 10,
+    paddingBottom: 2.5,
+    marginTop: 5,
     color: '#cc0000',
     fontWeight: 'bold',
     textAlign: 'right',
