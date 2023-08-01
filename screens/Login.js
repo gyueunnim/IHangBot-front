@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 
 function Login({navigation}) {
   const [id, setId] = useState('');
@@ -22,13 +22,14 @@ function Login({navigation}) {
   }
 
   const successLogin = () => {
-    setResponse(true);
-    navigation.navigate('Main');
+    setResponse(true);    navigation.navigate('Main');
   }
     
   return (
     <View style={loginStyle.container}>
       <View>
+        <Image source={require('../assets/mainLogo.png')} style={loginStyle.icon}></Image>
+        <Text style={loginStyle.iconText}>로그인이 필요한 서비스입니다</Text>
         <View style={{flexDirection: 'row'}}>
           <Text style={loginStyle.title}>아이디</Text>
           {
@@ -58,15 +59,29 @@ var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 const loginStyle = StyleSheet.create({
+  icon: {
+    width: 150,
+    height: 150,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  iconText: {
+    textAlign: 'center',
+    padding: 25,
+    paddingBottom: 0,
+    fontWeight: 'bold', 
+    fontSize: 10,
+    color: '#3f6ad7',
+  },
   container: {
     width: width,
     height: height,
     backgroundColor: 'white',
     padding: 40,
+    paddingTop: 150,
     flex: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
-    justifyContent: 'center', 
   },
   title: {
     padding: 10,
