@@ -15,9 +15,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="SignUp" component={SignUp}/>
-        <Stack.Screen name="Main" component={Main}/>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+        <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
+        <Stack.Screen name="Main" component={Main} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -26,9 +26,9 @@ export default function App() {
 function Main() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ChatBot" component={ChatBot}/>
-      <Stack.Screen name="Report" component={Report}/>
-      <Stack.Screen name="Modification" component={Modification}/>
+      <Stack.Screen name="ChatBot" component={ChatBot} options={{headerShown: false}} />
+      <Stack.Screen name="Report" component={Report} options={{headerShown: false}} />
+      <Stack.Screen name="Modification" component={Modification} options={{headerShown: false}} />
     </Stack.Navigator>
   )
 }
