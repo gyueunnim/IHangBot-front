@@ -1,16 +1,35 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 
 function Login({navigation}) {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+  const [btnStyle, setBtnStyle] = useState(loginStyle.btn);
+
+
+  useEffect(() => {
+    (id !== "") && (pw !== "") 
+    ? setBtnStyle(loginStyle.active) 
+    : setBtnStyle(loginStyle.btn)
+  }, [id, pw])
 
   // TODO: 서버 통신
-  let response = false;
+  const [response, setResponse] = useState(true);
+  let server = false;
   
+  const requestLogin = () => {
+    server === false ? setResponse(false) : successLogin();
+  }
+
+  const successLogin = () => {
+    setResponse(true);    navigation.navigate('Main');
+  }
+    
   return (
     <View style={loginStyle.container}>
       <View>
+        <Image source={require('../assets/mainLogo.png')} style={loginStyle.icon}></Image>
+        <Text style={loginStyle.iconText}>로그인이 필요한 서비스입니다</Text>
         <View style={{flexDirection: 'row'}}>
           <Text style={loginStyle.title}>아이디</Text>
           {
@@ -23,7 +42,7 @@ function Login({navigation}) {
         <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} secureTextEntry={true} style={loginStyle.form} />
       </View>
       <View>
-        <TouchableOpacity onPress={() => {navigation.navigate('Main')}}>
+        <TouchableOpacity onPress={() => requestLogin()}>
           <Text style={(id !== '' && pw !== '') ? loginStyle.active : loginStyle.btn}>로그인</Text>
         </TouchableOpacity>
       </View>
@@ -40,21 +59,35 @@ var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 const loginStyle = StyleSheet.create({
+  icon: {
+    width: 150,
+    height: 150,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  iconText: {
+    textAlign: 'center',
+    padding: 25,
+    paddingBottom: 0,
+    fontWeight: 'bold', 
+    fontSize: 10,
+    color: '#3f6ad7',
+  },
   container: {
     width: width,
     height: height,
     backgroundColor: 'white',
     padding: 40,
+    paddingTop: 150,
     flex: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
-    justifyContent: 'center', 
   },
   title: {
     padding: 10,
     paddingLeft: 0,
-    paddingBottom: 5,
-    marginTop: 10,
+    paddingBottom: 2.5,
+    marginTop: 5,
     color: '#999999',
     fontWeight: 'bold',
   },
@@ -95,8 +128,8 @@ const loginStyle = StyleSheet.create({
     flex: 1,
     padding: 10,
     paddingLeft: 0,
-    paddingBottom: 5,
-    marginTop: 10,
+    paddingBottom: 2.5,
+    marginTop: 5,
     color: '#cc0000',
     fontWeight: 'bold',
     textAlign: 'right',
