@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 
@@ -5,24 +6,39 @@ function Login({navigation}) {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [btnStyle, setBtnStyle] = useState(loginStyle.btn);
+  const [loginErr, setLoginErr] = useState(false);
 
+  const loginInfo = {
+    "username": id, 
+    "password": pw,
+  }
 
   useEffect(() => {
     (id !== "") && (pw !== "") 
     ? setBtnStyle(loginStyle.active) 
     : setBtnStyle(loginStyle.btn)
+    setLoginErr(false);
   }, [id, pw])
 
   // TODO: 서버 통신
-  const [response, setResponse] = useState(true);
-  let server = false;
-  
   const requestLogin = () => {
-    server === false ? setResponse(false) : successLogin();
+    axios.get(`http://52.79.225.144:8080/member/login`, { params: loginInfo })
+      .then((response) => {
+        if(response.data.status == 200) {
+          successLogin();
+        } else {
+          console.log(response);
+          setLoginErr(true);
+        }
+      })
+      .catch((error) => {
+        setLoginErr(true);
+      })
   }
 
   const successLogin = () => {
-    setResponse(true);    navigation.navigate('Main');
+    setLoginErr(false);  
+    navigation.navigate('Main');
   }
     
   return (
@@ -33,7 +49,7 @@ function Login({navigation}) {
         <View style={{flexDirection: 'row'}}>
           <Text style={loginStyle.title}>아이디</Text>
           {
-            response === false ? <Text style={loginStyle.loginError}>로그인에 실패하였습니다.</Text>
+            loginErr === true ? <Text style={loginStyle.loginError}>로그인에 실패하였습니다.</Text>
             : null
           }
         </View>
