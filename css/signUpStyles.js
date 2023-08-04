@@ -12,6 +12,7 @@ export const  signUpStyle = StyleSheet.create({
       marginLeft: 'auto',
       marginRight: 'auto',
       justifyContent: 'center', 
+      paddingTop: 75,
     },
     title: {
       paddingTop: 7,
