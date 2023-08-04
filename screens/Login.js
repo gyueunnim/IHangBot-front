@@ -2,9 +2,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 import { loginStyle } from '../css/loginStyles';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoginState } from '../redux/logInfo';
+import { CommonActions } from '@react-navigation/routers';
+
 
 function Login({navigation}) {
   const loginState = useSelector((state) => state.loginState);
+  
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [btnStyle, setBtnStyle] = useState(loginStyle.btn);

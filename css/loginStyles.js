@@ -1,3 +1,4 @@
+import { Dimensions, StyleSheet } from "react-native";
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
@@ -74,6 +75,25 @@ export const loginStyle = StyleSheet.create({
     paddingBottom: 2.5,
     marginTop: 5,
     color: '#cc0000',
+    fontWeight: 'bold',
+    textAlign: 'right',
+  },
+  goReport: {
+    textAlign: 'center',
+    padding: 25,
+    paddingBottom: 0,
+    fontWeight: 'bold', 
+    fontSize: 12,
+    color: '#3f6ad7',
+    fontWeight: 'bold',
+  },
+  goReportText: {
+    flex: 1,
+    padding: 10,
+    paddingLeft: 0,
+    paddingBottom: 2.5,
+    marginTop: 5,
+    color: '#528638',
     fontWeight: 'bold',
     textAlign: 'right',
   },

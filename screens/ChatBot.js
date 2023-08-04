@@ -118,6 +118,4 @@ export default function ChatBot({navigation}) {
     </View>
   );
 }
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
 
