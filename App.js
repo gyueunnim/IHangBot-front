@@ -21,8 +21,36 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
           <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
           <Stack.Screen name="ChatBot" component={ChatBot} options={{headerShown: false}} />
-          <Stack.Screen name="Report" component={Report} options={{headerShown: false}} />
-          <Stack.Screen name="Modification" component={Modification} options={{headerShown: false}} />
+          <Stack.Screen
+            name="Report"
+            component={Report}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: ({ current: { progress } }) => ({
+                cardStyle: {
+                  opacity: progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                  }),
+                },
+              }),
+            }}
+          />
+          <Stack.Screen
+            name="Modification"
+            component={Modification}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: ({ current: { progress } }) => ({
+                cardStyle: {
+                  opacity: progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                  }),
+                },
+              }),
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
