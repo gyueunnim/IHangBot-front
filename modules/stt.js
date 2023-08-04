@@ -2,8 +2,8 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import { toByteArray } from 'base64-js';
 
-const clientId = '';
-const clientSecret = '';
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
 const url = 'https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=Kor';
 
 export default async function stt(fileUri) {
