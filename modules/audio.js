@@ -2,18 +2,18 @@ import { Audio } from 'expo-av';
 
 export async function startRecording() {
   try {
-    console.log('Requesting permissions..');
+    // console.log('Requesting permissions..');
     await Audio.requestPermissionsAsync();
     await Audio.setAudioModeAsync({
       allowsRecordingIOS: true,
       playsInSilentModeIOS: true,
     });
 
-    console.log('Starting recording..');
+    // console.log('Starting recording..');
     const recordOption = Audio.RecordingOptionsPresets.HIGH_QUALITY;
     recordOption.android.extension = ".wav";
     const { recording } = await Audio.Recording.createAsync(recordOption);
-    console.log('Recording started');
+    // console.log('Recording started');
     return recording;
   } catch (err) {
     console.error('Failed to start recording', err);
@@ -21,7 +21,7 @@ export async function startRecording() {
 }
 
 export async function stopRecording(recording) {
-  console.log('Stopping recording..');
+  // console.log('Stopping recording..');
   await recording.stopAndUnloadAsync();
   await Audio.setAudioModeAsync(
     {
