@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, ScrollView } from 'react-native';
 import { RadioButton } from 'react-native-paper';
@@ -12,7 +13,19 @@ function SignUp({navigation}) {
   const [gender, setGender] = useState(true);
   const [email, setEmail] = useState('');
   const [btnStyle, setBtnStyle] = useState(signUpStyle.btn);
+  const [idCheckErr, setIdCheckErr] = useState(false);
   const [pwCheckErr, setPwCheckErr] = useState(0);
+  const [signUpErr, setSignUpErr] = useState(false);
+
+  const userInfo = {
+    "username": id,
+    "password": pw,
+    "check_password": pwCheck,
+    "email": email,
+    "child_name": name,
+    "child_age": age,
+    "child_gender": gender
+  }
 
   useEffect(() => {
     (name !== "") && (id !== "") && (pw !== "") && (pwCheck !== "") && (age !== "") && (email !== "") 
@@ -23,20 +36,37 @@ function SignUp({navigation}) {
   useEffect(() => {
     pwCheck !== '' ? (pw !== pwCheck ? setPwCheckErr(1)  : setPwCheckErr(2)) 
     : setPwCheckErr(0);
-  }, [pwCheck])
+  }, [pw, pwCheck])
+
+  useEffect(() => {
+    setIdCheckErr(false);
+  }, [id])
 
   
   // TODO: 서버 통신
-  const [response, setResponse] = useState(true);
-  let server = false;
-
-  const requestSignUp = () => {
-    server === false ? setResponse(false) : successSignUp();
+  const requestSignUp = async () => {
+    if(pwCheckErr === 2) {
+      axios.post('http://52.79.225.144:8080/member/signUp', userInfo)
+        .then((response) => {          
+          successSignUp(); 
+        })
+        .catch((error) => { // 이미 존재하는 아이디
+          setIdCheckErr(true);
+          failSignUp();
+        });
+    } else {
+      failSignUp(); // 비밀번호 일치하지 않을 때
+    }
   }
 
   const successSignUp = () => {
-    setResponse(true);
+    setIdCheckErr(false);
+    setSignUpErr(false);
     navigation.navigate('Login');
+  }
+
+  const failSignUp = () => {
+    setSignUpErr(true);
   }
   
   return (
@@ -55,6 +85,10 @@ function SignUp({navigation}) {
           <View style={signUpStyle.fx}>
             <Text style={signUpStyle.title}>아이디 </Text>
             <Text style={signUpStyle.highlight}>*</Text>
+            {
+              idCheckErr === false ? null
+              : <Text style={signUpStyle.pwErr} >이미 존재하는 아이디 입니다</Text>
+            }
           </View>
           <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} style={signUpStyle.form} />
 
@@ -104,14 +138,15 @@ function SignUp({navigation}) {
             <Text style={signUpStyle.title}>이메일 </Text>
             <Text style={signUpStyle.highlight}>*</Text>
           </View>
-          <TextInput placeholder="이메일을 입력하세요" onChangeText={(value) => setEmail(value)} secureTextEntry={true} style={signUpStyle.form} />
+          <TextInput placeholder="이메일을 입력하세요" onChangeText={(value) => setEmail(value)} style={signUpStyle.form} />
         </View>
 
         <View>
           <TouchableOpacity onPress={() => requestSignUp()}> 
           <Text style={(name !== '' && id !== '' && pw !== '' && pwCheck !== '' && age !== '') ? signUpStyle.active : signUpStyle.btn}>회원가입</Text>
             {
-            response === false ?  <Text style={signUpStyle.signUpErr}>회원가입에 실패하였습니다 - 다시 시도해주세요</Text> : null
+            signUpErr === false ? null
+            : <Text style={signUpStyle.signUpErr}>회원가입에 실패하였습니다 - 다시 시도해주세요</Text> 
             }
           </TouchableOpacity>
         </View>
