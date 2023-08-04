@@ -2,8 +2,8 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import qs from 'qs';
 
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
+const clientId = 'r6yms009vl';
+const clientSecret = 'vSGFZ0fpSUaRqfyE2xETvbfzrG6V3QCSyvRhg8Hn';
 const url = 'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts';
 
 export default async function tts(chatResponse) {
