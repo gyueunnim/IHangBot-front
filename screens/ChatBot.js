@@ -5,9 +5,11 @@ import stt from '../modules/stt';
 import tts from '../modules/tts';
 import axios from 'axios';
 import { styles } from '../css/chatbotStyles';
+import { useSelector } from 'react-redux';
+
 
 export default function ChatBot({navigation}) {
-
+  const loginState = useSelector((state) => state.loginState);
   const [sound, setSound] = useState();
   const [recording, setRecording] = useState();
   const [userChat, setUserChat] = useState({ text: '', uri: '' });
@@ -26,16 +28,16 @@ export default function ChatBot({navigation}) {
   async function handleStopRecording() {
     setUserRecording(false);
     setUserTextMaking(true);
-    if (recording) { // recording 상태가 null이 아닌 경우에만 녹음 중지
+    if (recording) {
       const uri = await stopRecording(recording);
       const sttResponse = await stt(uri);
+      queryToGPT(sttResponse.text);      
+      setUserTextMaking(false);
       setUserChat({ 
         uri: uri,
-        text: sttResponse.text
+        text: sttResponse.text,
       }); 
-      console.log('gpt실행')
-      queryToGPT(sttResponse.text);
-      setRecording(null); // recording 상태 초기화
+      setRecording(null);
     }
   }
 
@@ -44,13 +46,11 @@ export default function ChatBot({navigation}) {
   }
 
   const queryToGPT = async (query) => {
-    setUserTextMaking(false);
     setChatTextMaking(true);
-    axios.post(`http://13.124.53.159:8079/api/chat/test1234`, {
-        "string": '안녕'
+    axios.post(`http://13.124.53.159:8079/api/chat/${loginState.id}`, {
+        "string": query,
     })
     .then(async (response) => {
-      console.log(response.data);
       const ttsResponseUri = await tts(response.data.message);
       setChatTextMaking(false);
       setGptChat({
@@ -62,14 +62,6 @@ export default function ChatBot({navigation}) {
     .catch((error) => console.error(error))
   }
 
-  // useEffect(() => {
-  //   console.log('(Chatbot)-Recording stopped and stored at', userChat.uri);
-  // }, [userChat.uri]);
-
-  // useEffect(() => {
-  //   console.log('userChat-text: ', userChat.text);
-  // }, [userChat.text])
-
   useEffect(() => {
     return sound
       ? () => {
@@ -78,8 +70,6 @@ export default function ChatBot({navigation}) {
         }
       : undefined;
   }, []);
-
-
 
   return (
     <View style={styles.container}>
