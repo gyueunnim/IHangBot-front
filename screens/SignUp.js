@@ -28,12 +28,6 @@ function SignUp({navigation}) {
   }
 
   useEffect(() => {
-    (name !== "") && (id !== "") && (pw !== "") && (pwCheck !== "") && (age !== "") && (email !== "") 
-    ? setBtnStyle(signUpStyle.active) 
-    : setBtnStyle(signUpStyle.btn);
-  }, [name, id, pw, pwCheck, gender, age, email])
-
-  useEffect(() => {
     pwCheck !== '' ? (pw !== pwCheck ? setPwCheckErr(1)  : setPwCheckErr(2)) 
     : setPwCheckErr(0);
   }, [pw, pwCheck])

@@ -12,10 +12,8 @@ function Login({navigation}) {
   
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
-  const [btnStyle, setBtnStyle] = useState(loginStyle.btn);
   const [loginErr, setLoginErr] = useState(false);
   const [defaultInput, setDefaultInput] = useState(null);
-  const [screen, setScreen] = useState('ChatBot');
 
   const dispatch = useDispatch();
 
@@ -23,13 +21,6 @@ function Login({navigation}) {
     "username": id, 
     "password": pw,
   }
-
-  useEffect(() => {
-    (id !== "") && (pw !== "") 
-    ? setBtnStyle(loginStyle.active) 
-    : setBtnStyle(loginStyle.btn)
-    setLoginErr(false);
-  }, [id, pw])
 
   useEffect(() => {
     if(loginState.login === true) {
