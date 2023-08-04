@@ -11,7 +11,6 @@ function SignUp({navigation}) {
   const [pwCheck, setPwCheck] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState(true);
-  const [email, setEmail] = useState('');
   const [btnStyle, setBtnStyle] = useState(signUpStyle.btn);
   const [idCheckErr, setIdCheckErr] = useState(false);
   const [pwCheckErr, setPwCheckErr] = useState(0);
@@ -21,17 +20,10 @@ function SignUp({navigation}) {
     "username": id,
     "password": pw,
     "check_password": pwCheck,
-    "email": email,
     "child_name": name,
     "child_age": age,
     "child_gender": gender
   }
-
-  useEffect(() => {
-    (name !== "") && (id !== "") && (pw !== "") && (pwCheck !== "") && (age !== "") && (email !== "") 
-    ? setBtnStyle(signUpStyle.active) 
-    : setBtnStyle(signUpStyle.btn);
-  }, [name, id, pw, pwCheck, gender, age, email])
 
   useEffect(() => {
     pwCheck !== '' ? (pw !== pwCheck ? setPwCheckErr(1)  : setPwCheckErr(2)) 
@@ -42,8 +34,6 @@ function SignUp({navigation}) {
     setIdCheckErr(false);
   }, [id])
 
-  
-  // TODO: 서버 통신
   const requestSignUp = async () => {
     if(pwCheckErr === 2) {
       axios.post('http://52.79.225.144:8080/member/signUp', userInfo)
@@ -74,7 +64,7 @@ function SignUp({navigation}) {
     <View style={signUpStyle.container}>
       <ScrollView>
         <View>
-          <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 25, marginTop: 50}}>회원가입</Text>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 30, marginTop: 50, marginBottom: 10,}}>회원가입</Text>
           
           <View style={signUpStyle.fx}>
             <Text style={signUpStyle.title}>아이 이름 </Text> 
@@ -133,12 +123,6 @@ function SignUp({navigation}) {
               <TextInput placeholder="아이의 나이" onChangeText={(value) => setAge(value)} style={signUpStyle.fxForm} />
             </View>  
           </View>
-
-          <View style={signUpStyle.fx}>
-            <Text style={signUpStyle.title}>이메일 </Text>
-            <Text style={signUpStyle.highlight}>*</Text>
-          </View>
-          <TextInput placeholder="이메일을 입력하세요" onChangeText={(value) => setEmail(value)} style={signUpStyle.form} />
         </View>
 
         <View>
