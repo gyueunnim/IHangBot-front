@@ -25,7 +25,7 @@ function Report({navigation}) {
           </TouchableOpacity>
         </View>
         <View style={styles.bottomText}>
-          <TouchableOpacity onPress={() => navigation.navigate('Modification')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
             <Ionicons name='person-circle-outline' size={32} color='white' />
           </TouchableOpacity>
         </View>

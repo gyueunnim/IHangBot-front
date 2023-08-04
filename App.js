@@ -7,7 +7,7 @@ import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import ChatBot from './screens/ChatBot';
 import Report from './screens/Report';
-import Modification from './screens/Modification';
+import Setting from './screens/Setting';
 import { Provider } from 'react-redux';
 import logInfo from './redux/logInfo';
 
@@ -37,8 +37,8 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Modification"
-            component={Modification}
+            name="Setting"
+            component={Setting}
             options={{
               headerShown: false,
               cardStyleInterpolator: ({ current: { progress } }) => ({
