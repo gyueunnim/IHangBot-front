@@ -104,7 +104,10 @@ function Login({navigation}) {
       </View>
       <View>
         <TouchableOpacity onPress={() => {navigation.navigate('SignUp')}}>
-          <Text style={loginStyle.signUp}>회원가입</Text>
+          {
+            loginState.login === true ? null  
+            : <Text style={loginStyle.signUp}>회원가입</Text>
+          }
         </TouchableOpacity>
       </View>
     </View>
