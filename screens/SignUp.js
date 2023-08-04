@@ -11,7 +11,6 @@ function SignUp({navigation}) {
   const [pwCheck, setPwCheck] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState(true);
-  const [btnStyle, setBtnStyle] = useState(signUpStyle.btn);
   const [idCheckErr, setIdCheckErr] = useState(false);
   const [pwCheckErr, setPwCheckErr] = useState(0);
   const [signUpErr, setSignUpErr] = useState(false);
