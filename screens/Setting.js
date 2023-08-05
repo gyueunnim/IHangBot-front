@@ -15,22 +15,27 @@ function Setting({navigation}) {
   const [age, setAge] = useState('');
   const [pw, setPw] = useState('');
   const [pwCheck, setPwCheck] = useState('');
-  const [gender, setGender] = useState(true);
-  const [btnStyle, setBtnStyle] = useState(loginStyle.btn);
+  const [gender, setGender] = useState();
   const [pwCheckErr, setPwCheckErr] = useState(0);
-  const [userInfo, setUserInfo] = useState({child_name: '', age: ''});
+  const [initialInfo, setInitialInfo] = useState({name: '', gender: '', age: ''});
+  const [settingErr, setSettingErr] = useState(0);
+
+  const [settingchange, setSettingChange] = useState(false);
   
   const requestSetting = () => {
     axios.put(`http://52.79.225.144:8080/member/${loginState.id}/profile/setting`, {    
-      "child_name": "string",
-      "child_age": 0,
-      "child_gender": true,
-      "email": "string"
+      "child_name": name,
+      "child_age": age,
+      "child_gender": gender,
+      "password": pw,
+      "password_check": pwCheck,
     })
       .then((response) => {
-        console.log(response.data);
+        setSettingErr(2); // 성공
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setSettingErr(1); // 실패
+      });
   };
 
   useEffect(() => {
@@ -38,17 +43,26 @@ function Setting({navigation}) {
     : setPwCheckErr(0);
   }, [pw, pwCheck]);
 
-  // useEffect(() => {
-  //   console.log(pw, pwCheck, name, gender, age)
-  // })
+  useEffect(() => {
+    setSettingErr(0);
+  }, [name, gender, age, pw, pwCheck]);
+
+  useEffect(() => {
+    (initialInfo.gender !== gender || initialInfo.name !== name || initialInfo.age !== age) ? 
+    setSettingChange(true) : setSettingChange(false);
+  }, [name, age, gender]);
 
   useEffect(() => {
     axios.get(`http://52.79.225.144:8080/member/${loginState.id}/profile`)
       .then((response) => {
-        setUserInfo({
-          child_name: response.data.data.child_name,
-          age: response.data.data.child_age
+        setInitialInfo({
+          name: response.data.data.child_name,
+          gender: response.data.data.child_gender,
+          age: response.data.data.child_age,
         });
+        setName(response.data.data.child_name);
+        setAge(response.data.data.child_age);
+        setGender(response.data.data.child_gender);
       })
       .catch((error) => console.log(error));
   }, [])
@@ -63,7 +77,7 @@ function Setting({navigation}) {
       <View style={styles.middle}>
         <View>
           <Text style={styles.title}>아이 이름</Text>
-          <TextInput placeholder="아이 이름을 입력하세요" defaultValue={userInfo.child_name} onChangeText={(value) => setName(value)} style={styles.form} />
+          <TextInput placeholder="아이 이름을 입력하세요" defaultValue={name} onChangeText={(value) => setName(value)} style={styles.form} />
         </View>
 
         <View style={signUpStyle.fx}>
@@ -78,7 +92,7 @@ function Setting({navigation}) {
                 <Text style={signUpStyle.radioText}>남자</Text>
               </View>
               <View style={signUpStyle.fx}>
-                <RadioButton status={gender == false ? "checked" : "unchecked"} onPress={() => setGender(false)} />
+                <RadioButton status={gender === false ? "checked" : "unchecked"} onPress={() => setGender(false)} />
                 <Text style={signUpStyle.radioText}>여자</Text>
               </View>
             </View>
@@ -89,7 +103,7 @@ function Setting({navigation}) {
               <Text style={signUpStyle.title}>나이 </Text>
               <Text style={signUpStyle.highlight}>*</Text>
             </View>
-            <TextInput placeholder="아이의 나이" defaultValue={userInfo.age.toString()} onChangeText={(value) => setAge(value)} style={signUpStyle.fxForm} />
+            <TextInput placeholder="아이의 나이" defaultValue={age.toString()} onChangeText={(value) => setAge(value)} style={signUpStyle.fxForm} />
           </View>  
         </View>
 
@@ -104,9 +118,13 @@ function Setting({navigation}) {
           }
         </View>
         <TextInput placeholder="비밀번호를 다시 한번 입력하세요" onChangeText={(value) => setPwCheck(value)} secureTextEntry={true} style={styles.form} />
-        <TouchableOpacity onPress={() => requestLogin()}>
-          <Text style={(name != "" && age !== "" && pw !== "" && pwCheck != "") ? loginStyle.active: loginStyle.btn}>수정하기</Text>
+        <TouchableOpacity onPress={() => requestSetting()}>
+          <Text style={(settingchange) ? loginStyle.active: loginStyle.btn}>수정하기</Text>          
         </TouchableOpacity>
+        {
+          settingErr === 0 ? null
+          : (settingErr === 1 ? <Text style={signUpStyle.pwErr}>수정에 실패하였습니다</Text> : <Text style={signUpStyle.pwPass}>수정에 성공하였습니다</Text>)
+        }
       </View>
 
       <View style={styles.bottomTextContainer}>

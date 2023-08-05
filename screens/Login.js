@@ -86,7 +86,7 @@ function Login({navigation}) {
           loginState.login === false ? null : (pw === '' ? <Text style={loginStyle.goReportText}>비밀번호를 입력해주세요</Text> : null)
         }
         </View>
-        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={null}secureTextEntry={true} style={loginStyle.form} />
+        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={loginStyle.form} />
       </View>
       <View>
         <TouchableOpacity onPress={() => requestLogin()}>
