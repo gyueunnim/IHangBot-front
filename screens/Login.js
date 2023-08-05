@@ -12,10 +12,8 @@ function Login({navigation}) {
   
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
-  const [btnStyle, setBtnStyle] = useState(loginStyle.btn);
   const [loginErr, setLoginErr] = useState(false);
   const [defaultInput, setDefaultInput] = useState(null);
-  const [screen, setScreen] = useState('ChatBot');
 
   const dispatch = useDispatch();
 
@@ -23,13 +21,6 @@ function Login({navigation}) {
     "username": id, 
     "password": pw,
   }
-
-  useEffect(() => {
-    (id !== "") && (pw !== "") 
-    ? setBtnStyle(loginStyle.active) 
-    : setBtnStyle(loginStyle.btn)
-    setLoginErr(false);
-  }, [id, pw])
 
   useEffect(() => {
     if(loginState.login === true) {
@@ -95,7 +86,7 @@ function Login({navigation}) {
           loginState.login === false ? null : (pw === '' ? <Text style={loginStyle.goReportText}>비밀번호를 입력해주세요</Text> : null)
         }
         </View>
-        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={null}secureTextEntry={true} style={loginStyle.form} />
+        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={loginStyle.form} />
       </View>
       <View>
         <TouchableOpacity onPress={() => requestLogin()}>
