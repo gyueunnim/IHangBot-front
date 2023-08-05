@@ -53,13 +53,17 @@ export default function ChatBot({navigation}) {
     .then(async (response) => {
       const ttsResponseUri = await tts(response.data.message);
       setChatTextMaking(false);
+      console.log(response.data.message);
       setGptChat({
           text: response.data.message,
           uri: ttsResponseUri
       });
       await handlePlaySound(ttsResponseUri);
     })
-    .catch((error) => console.error(error))
+    .catch((error) => {
+      setChatTextMaking(false);
+      console.error(error);
+    })
   }
 
   useEffect(() => {
