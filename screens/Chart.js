@@ -1,5 +1,5 @@
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import { chartStyles } from '../css/chartStyles';
 
 

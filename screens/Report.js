@@ -1,11 +1,12 @@
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { styles } from '../css/reportSetStyles';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Chart from './Chart';
 import { chartStyles } from '../css/chartStyles';
+import { commonStyle } from '../css/commonStyle';
+import { reportStyles } from '../css/reportSetStyles';
 
 function Report({navigation}) {
   const loginState = useSelector((state) => state.loginState);
@@ -84,7 +85,7 @@ function Report({navigation}) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={reportStyles.container}>
       <ScrollView>
       {
         loading === 1 ?
@@ -98,27 +99,26 @@ function Report({navigation}) {
               <Text style={chartStyles.loadText}>분석중 입니다...</Text>
               <Text style={chartStyles.loadText}>잠시만 기다려주세요</Text>
             </View> 
-          :
-          <View>
-            <Text style={chartStyles.main}>{name}님의 위클리 보고서</Text>
-            <Chart pieChartData={pieChartData} stackedBarChartData={stackedBarChartData} keywords={keywords} concerns={concerns} suggestion={suggestion} />
-          </View>
+          : <View>
+              <Text style={chartStyles.main}>{name}님의 위클리 보고서</Text>
+              <Chart pieChartData={pieChartData} stackedBarChartData={stackedBarChartData} keywords={keywords} concerns={concerns} suggestion={suggestion} />
+            </View>
       }
       </ScrollView>
 
 
-      <View style={styles.bottomTextContainer}>
-        <View style={styles.bottomText}>
+      <View style={commonStyle.bottomTextContainer}>
+        <View style={commonStyle.bottomText}>
           <TouchableOpacity>
             <Ionicons name='newspaper' size={32} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={styles.bottomText}>
+        <View style={commonStyle.bottomText}>
           <TouchableOpacity onPress={() => navigation.navigate('ChatBot')}>
             <Ionicons name='home-outline' size={32} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={styles.bottomText}>
+        <View style={commonStyle.bottomText}>
           <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
             <Ionicons name='person-circle-outline' size={32} color='white' />
           </TouchableOpacity>

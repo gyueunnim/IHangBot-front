@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { useState, useEffect } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { styles } from '../css/reportSetStyles';
-import { loginStyle } from '../css/loginStyles';
+import { commonStyle } from '../css/commonStyle';
 import { signUpStyle } from '../css/signUpStyles';
 import { useSelector } from 'react-redux';
 import { RadioButton } from 'react-native-paper';
@@ -76,14 +76,14 @@ function Setting({navigation}) {
 
       <View style={styles.middle}>
         <View>
-          <Text style={styles.title}>아이 이름</Text>
-          <TextInput placeholder="아이 이름을 입력하세요" defaultValue={name} onChangeText={(value) => setName(value)} style={styles.form} />
+          <Text style={commonStyle.title}>아이 이름</Text>
+          <TextInput placeholder="아이 이름을 입력하세요" defaultValue={name} onChangeText={(value) => setName(value)} style={commonStyle.form} />
         </View>
 
         <View style={signUpStyle.fx}>
           <View>
             <View style={signUpStyle.fx}>
-              <Text style={signUpStyle.title}>성별 </Text>
+              <Text style={commonStyle.title}>성별 </Text>
               <Text style={signUpStyle.highlight}>*</Text>
             </View>
             <View style={signUpStyle.fx}>
@@ -100,7 +100,7 @@ function Setting({navigation}) {
 
           <View>
             <View style={signUpStyle.formAge}>
-              <Text style={signUpStyle.title}>나이 </Text>
+              <Text style={commonStyle.title}>나이 </Text>
               <Text style={signUpStyle.highlight}>*</Text>
             </View>
             <TextInput placeholder="아이의 나이" defaultValue={age.toString()} onChangeText={(value) => setAge(value)} style={signUpStyle.fxForm} />
@@ -108,18 +108,18 @@ function Setting({navigation}) {
         </View>
 
         <View>
-          <Text style={styles.title}>비밀번호 변경</Text>
-          <TextInput placeholder="변경하실 비밀번호를 입력하세요" secureTextEntry={true} onChangeText={(value) => setPw(value)} style={styles.form} />
+          <Text style={commonStyle.title}>비밀번호 변경</Text>
+          <TextInput placeholder="변경하실 비밀번호를 입력하세요" secureTextEntry={true} onChangeText={(value) => setPw(value)} style={commonStyle.form} />
         </View>
         <View style={signUpStyle.fx}>
-          <Text style={styles.title}>비밀번호 확인</Text>
+          <Text style={commonStyle.title}>비밀번호 확인</Text>
           {
-            pwCheckErr !== 0 ? (pwCheckErr === 1 ? <Text style={signUpStyle.pwErr} >비밀번호가 일치하지 않습니다</Text> : <Text style={signUpStyle.pwPass} >비밀번호가 일치합니다</Text>) : null
+            pwCheckErr !== 0 ? (pwCheckErr === 1 ? <Text style={commonStyle.error} >비밀번호가 일치하지 않습니다</Text> : <Text style={signUpStyle.pwPass} >비밀번호가 일치합니다</Text>) : null
           }
         </View>
-        <TextInput placeholder="비밀번호를 다시 한번 입력하세요" onChangeText={(value) => setPwCheck(value)} secureTextEntry={true} style={styles.form} />
+        <TextInput placeholder="비밀번호를 다시 한번 입력하세요" onChangeText={(value) => setPwCheck(value)} secureTextEntry={true} style={commonStyle.form} />
         <TouchableOpacity onPress={() => requestSetting()}>
-          <Text style={(settingchange) ? loginStyle.active: loginStyle.btn}>수정하기</Text>          
+          <Text style={(settingchange) ? commonStyle.active: commonStyle.btn}>수정하기</Text>          
         </TouchableOpacity>
         {
           settingErr === 0 ? null
@@ -127,18 +127,18 @@ function Setting({navigation}) {
         }
       </View>
 
-      <View style={styles.bottomTextContainer}>
-        <View style={styles.bottomText}>
+      <View style={commonStyle.bottomTextContainer}>
+        <View style={commonStyle.bottomText}>
           <TouchableOpacity>
             <Ionicons name='newspaper-outline' size={32} color='white'  onPress={() => {navigation.navigate('Report')}} />
           </TouchableOpacity>
         </View>
-        <View style={styles.bottomText}>
+        <View style={commonStyle.bottomText}>
           <TouchableOpacity onPress={() => navigation.navigate('ChatBot')}>
             <Ionicons name='home-outline' size={32} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={styles.bottomText}>
+        <View style={commonStyle.bottomText}>
           <TouchableOpacity>
             <Ionicons name='person-circle' size={32} color='white' />
           </TouchableOpacity>
