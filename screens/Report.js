@@ -1,18 +1,24 @@
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+/* screens */
 import Chart from './Chart';
+
+/* css */
 import { chartStyles } from '../css/chartStyles';
-import { commonStyle } from '../css/commonStyle';
+import { commonStyles } from '../css/commonStyle';
 import { reportStyles } from '../css/reportSetStyles';
 
 function Report({navigation}) {
   const loginState = useSelector((state) => state.loginState);
   const [loading, setLoading] = useState(0);
   const [name, setName] = useState('');
-
+  const [suggestion, setSuggestion] = useState('');
+  const [concerns, setConcerns] = useState([]);
+  const [keywords, setKeywords] = useState([]);
   const [sentiments, setSentiments] = useState({
     negThisWeek: 0,
     negLastWeek: 0,
@@ -20,10 +26,32 @@ function Report({navigation}) {
     posLastWeek: 0,
   });
 
-  const [suggestion, setSuggestion] = useState('');
+  const pieChartData = [
+    {
+      name: "긍정",
+      population: sentiments.posThisWeek,
+      color: "#0098DB",
+      legendFontColor: "#444444",
+      legendFontSize: 17
+    },
+    {
+      name: "부정",
+      population: sentiments.negThisWeek,
+      color: "#DB4D69",
+      legendFontColor: "#444444",
+      legendFontSize: 17
+    },
+  ];
 
-  const [concerns, setConcerns] = useState([]);
-  const [keywords, setKeywords] = useState([]);
+  const stackedBarChartData = {
+    labels: ["저번 주", "이번 주"],
+    legend: ["부정", "긍정"],
+    data: [
+        [Number(sentiments.negLastWeek.toFixed(0)), Number(sentiments.posLastWeek.toFixed(0))],
+        [Number(sentiments.negThisWeek.toFixed(0)), Number(sentiments.posThisWeek.toFixed(0))]
+    ],
+    barColors: ["#DB4D69", "#0098DB"],
+  };
 
   useEffect(() => {
     axios.post(`http://52.79.225.144:8080/report/${loginState.id}`)
@@ -46,7 +74,7 @@ function Report({navigation}) {
       setLoading(1);
       console.log(error);
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     axios.get(`http://52.79.225.144:8080/member/${loginState.id}/profile`)
@@ -54,35 +82,7 @@ function Report({navigation}) {
       setName(response.data.data.child_name);
     })
     .catch((error) => console.log(error));
-  })
-
-
-  const pieChartData = [
-    {
-      name: "긍정",
-      population: sentiments.posThisWeek,
-      color: "#0098DB",
-      legendFontColor: "#444444",
-      legendFontSize: 17
-    },
-    {
-      name: "부정",
-      population: sentiments.negThisWeek,
-      color: "#DB4D69",
-      legendFontColor: "#444444",
-      legendFontSize: 17
-    }
-  ]
-
-  const stackedBarChartData = {
-    labels: ["저번 주", "이번 주"],
-    legend: ["부정", "긍정"],
-    data: [
-        [Number(sentiments.negLastWeek.toFixed(0)), Number(sentiments.posLastWeek.toFixed(0))],
-        [Number(sentiments.negThisWeek.toFixed(0)), Number(sentiments.posThisWeek.toFixed(0))]
-    ],
-    barColors: ["#DB4D69", "#0098DB"],
-  }
+  });
 
   return (
     <View style={reportStyles.container}>
@@ -107,18 +107,18 @@ function Report({navigation}) {
       </ScrollView>
 
 
-      <View style={commonStyle.bottomTextContainer}>
-        <View style={commonStyle.bottomText}>
+      <View style={commonStyles.bottomTextContainer}>
+        <View style={commonStyles.bottomText}>
           <TouchableOpacity>
             <Ionicons name='newspaper' size={32} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={commonStyle.bottomText}>
+        <View style={commonStyles.bottomText}>
           <TouchableOpacity onPress={() => navigation.navigate('ChatBot')}>
             <Ionicons name='home-outline' size={32} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={commonStyle.bottomText}>
+        <View style={commonStyles.bottomText}>
           <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
             <Ionicons name='person-circle-outline' size={32} color='white' />
           </TouchableOpacity>

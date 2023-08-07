@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React  from 'react';
+import { Provider } from 'react-redux';
 
 /* screen */
 import Login from './screens/Login';
@@ -8,7 +9,8 @@ import SignUp from './screens/SignUp';
 import ChatBot from './screens/ChatBot';
 import Report from './screens/Report';
 import Setting from './screens/Setting';
-import { Provider } from 'react-redux';
+
+/* redux */
 import logInfo from './redux/logInfo';
 
 const Stack = createStackNavigator();

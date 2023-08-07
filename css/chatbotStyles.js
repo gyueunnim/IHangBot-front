@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
-export const styles = StyleSheet.create({
+export const chatbotStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     backgroundColor: '#ecf0f1',

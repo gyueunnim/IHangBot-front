@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
-export const  signUpStyle = StyleSheet.create({
+export const  signUpStyles = StyleSheet.create({
     container: {
       width: width,
       height: height,

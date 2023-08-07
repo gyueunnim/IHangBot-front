@@ -1,10 +1,12 @@
-import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { Text, View } from 'react-native';
+import { PieChart, StackedBarChart } from 'react-native-chart-kit';
+
+/* css */
 import { chartStyles } from '../css/chartStyles';
 
-
 function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestion}) {
-  const sentiment = pieChartData[0].population > pieChartData[1].population
+  const sentiment = pieChartData[0].population > pieChartData[1].population;
+  
   return (
     <View>
       <Text style={chartStyles.title}>이번 주의 주요 검색 키워드 입니다</Text>

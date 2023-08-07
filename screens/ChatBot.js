@@ -1,11 +1,15 @@
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { useState, useEffect } from 'react';
-import { startRecording, stopRecording, playSound } from '../modules/audio';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+
+/* modules */
 import stt from '../modules/stt';
 import tts from '../modules/tts';
-import axios from 'axios';
-import { styles } from '../css/chatbotStyles';
-import { useSelector } from 'react-redux';
+import { startRecording, stopRecording, playSound } from '../modules/audio';
+
+/* css */
+import { chatbotStyles } from '../css/chatbotStyles';
 
 
 export default function ChatBot({navigation}) {
@@ -14,7 +18,6 @@ export default function ChatBot({navigation}) {
   const [recording, setRecording] = useState();
   const [userChat, setUserChat] = useState({ text: '', uri: '' });
   const [gptChat, setGptChat] = useState({ text: '', uri: '' });
-  
   const [userRecording, setUserRecording] = useState(false);
   const [userTextMaking, setUserTextMaking] = useState(false);
   const [chatTextMaking, setChatTextMaking] = useState(false);
@@ -23,7 +26,7 @@ export default function ChatBot({navigation}) {
     setUserRecording(true);
     const recording = await startRecording();
     setRecording(recording);
-  }
+  };
 
   async function handleStopRecording() {
     setUserRecording(false);
@@ -39,11 +42,11 @@ export default function ChatBot({navigation}) {
       }); 
       setRecording(null);
     }
-  }
+  };
 
   async function handlePlaySound(uri) {
     await playSound(uri);
-  }
+  };
 
   const queryToGPT = async (query) => {
     setChatTextMaking(true);
@@ -53,7 +56,6 @@ export default function ChatBot({navigation}) {
     .then(async (response) => {
       const ttsResponseUri = await tts(response.data.message);
       setChatTextMaking(false);
-      console.log(response.data.message);
       setGptChat({
           text: response.data.message,
           uri: ttsResponseUri
@@ -63,8 +65,8 @@ export default function ChatBot({navigation}) {
     .catch((error) => {
       setChatTextMaking(false);
       console.error(error);
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     return sound
@@ -76,37 +78,37 @@ export default function ChatBot({navigation}) {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.userChat}>
-        <View style={styles.fx}>
-          <Image source={require('../assets/child_Icon.png')} style={styles.Icon} />
+    <View style={chatbotStyles.container}>
+      <View style={chatbotStyles.userChat}>
+        <View style={chatbotStyles.fx}>
+          <Image source={require('../assets/child_Icon.png')} style={chatbotStyles.Icon} />
           <TouchableOpacity onPress={() => {handlePlaySound(userChat.uri)}}>
             {
               userChat.text === null ? null
-              : (userRecording === true ? <Text style={styles.text}>말하는 중...</Text>
+              : (userRecording === true ? <Text style={chatbotStyles.text}>말하는 중...</Text>
                 : (
-                  userTextMaking === true ? <Text style={styles.text}>글자를 만드는 중...</Text>
-                  : <Text style={styles.text}>{userChat.text}</Text>
+                  userTextMaking === true ? <Text style={chatbotStyles.text}>글자를 만드는 중...</Text>
+                  : <Text style={chatbotStyles.text}>{userChat.text}</Text>
                 ))
             }
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.gptChat}>
-        <View style={styles.fx}>
-          <Image source={require('../assets/chatbot_Icon.png')} style={styles.Icon} />
+      <View style={chatbotStyles.gptChat}>
+        <View style={chatbotStyles.fx}>
+          <Image source={require('../assets/chatbot_Icon.png')} style={chatbotStyles.Icon} />
           <TouchableOpacity onPress={() => {handlePlaySound(gptChat.uri)}}>
             {
-              chatTextMaking === true ? <Text style={styles.text}>대답을 생각하는 중...</Text>
-              : <Text style={styles.text}>{gptChat.text}</Text>
+              chatTextMaking === true ? <Text style={chatbotStyles.text}>대답을 생각하는 중...</Text>
+              : <Text style={chatbotStyles.text}>{gptChat.text}</Text>
             }
           </TouchableOpacity>
         </View>
       </View>
-      <View  style={styles.recordBox}>
+      <View  style={chatbotStyles.recordBox}>
         <TouchableOpacity onPress={recording ? handleStopRecording : handleStartRecording}
           onLongPress={() => navigation.navigate("Login")} delayLongPress={3000}>
-            <Image source={require('../assets/input_Icon.png')} style={styles.recordBtn}/>
+            <Image source={require('../assets/input_Icon.png')} style={chatbotStyles.recordBtn}/>
         </TouchableOpacity>
       </View>
     </View>

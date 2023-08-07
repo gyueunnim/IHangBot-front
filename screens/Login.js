@@ -1,16 +1,17 @@
-import axios from 'axios';
+import { Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
-import { loginStyle } from '../css/loginStyles';
-import { commonStyle } from '../css/commonStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLoginState } from '../redux/logInfo';
 import { CommonActions } from '@react-navigation/routers';
+import axios from 'axios';
+
+/* css */
+import { loginStyles } from '../css/loginStyles';
+import { commonStyles } from '../css/commonStyle';
 
 
 function Login({navigation}) {
   const loginState = useSelector((state) => state.loginState);
-  
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [loginErr, setLoginErr] = useState(false);
@@ -21,7 +22,7 @@ function Login({navigation}) {
   const loginInfo = {
     "username": id, 
     "password": pw,
-  }
+  };
 
   useEffect(() => {
     if(loginState.login === true) {
@@ -30,11 +31,11 @@ function Login({navigation}) {
     } else {
       setDefaultInput(null);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     setLoginErr(false);
-  }, [id, pw])
+  }, [id, pw]);
 
   const requestLogin = () => {
     axios.get(`http://52.79.225.144:8080/member/login`, { params: loginInfo })
@@ -43,15 +44,14 @@ function Login({navigation}) {
           setPw('');
           successLogin();
         } else {
-          console.log(response);
           setLoginErr(true);
         }
       })
       .catch((error) => {
         console.log(error);
         setLoginErr(true);
-      })
-  }
+      });
+  };
 
   const successLogin = () => {
     setLoginErr(false);
@@ -71,38 +71,38 @@ function Login({navigation}) {
   };
     
   return (
-    <View style={loginStyle.container}>
+    <View style={loginStyles.container}>
       <View>
-        <Image source={require('../assets/mainLogo.png')} style={loginStyle.icon}></Image>
+        <Image source={require('../assets/mainLogo.png')} style={loginStyles.icon}></Image>
         {
-          loginState.login === false ? <Text style={loginStyle.iconText}>로그인이 필요한 서비스입니다</Text>
-          : <Text style={loginStyle.goReport}>보고서 화면으로 이동합니다</Text>
+          loginState.login === false ? <Text style={loginStyles.iconText}>로그인이 필요한 서비스입니다</Text>
+          : <Text style={loginStyles.goReport}>보고서 화면으로 이동합니다</Text>
         }
         <View style={{flexDirection: 'row'}}>
-          <Text style={commonStyle.title}>아이디</Text>
+          <Text style={commonStyles.title}>아이디</Text>
           {
-            loginErr === true ? <Text style={commonStyle.error}>로그인에 실패하였습니다</Text> : null
+            loginErr === true ? <Text style={commonStyles.error}>로그인에 실패하였습니다</Text> : null
           }
         </View>
-        <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} defaultValue={defaultInput} style={commonStyle.form} />
+        <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} defaultValue={defaultInput} style={commonStyles.form} />
         <View style={{flexDirection: 'row'}}>
-        <Text style={commonStyle.title}>비밀번호</Text>
+        <Text style={commonStyles.title}>비밀번호</Text>
         {
-          loginState.login === false ? null : (pw === '' ? <Text style={loginStyle.goReportText}>비밀번호를 입력해주세요</Text> : null)
+          loginState.login === false ? null : (pw === '' ? <Text style={loginStyles.goReportText}>비밀번호를 입력해주세요</Text> : null)
         }
         </View>
-        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={commonStyle.form} />
+        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={commonStyles.form} />
       </View>
       <View>
         <TouchableOpacity onPress={() => requestLogin()}>
-          <Text style={(id !== '' && pw !== '') ? commonStyle.active : commonStyle.btn}>로그인</Text>
+          <Text style={(id !== '' && pw !== '') ? commonStyles.active : commonStyles.btn}>로그인</Text>
         </TouchableOpacity>
       </View>
       <View>
         <TouchableOpacity onPress={() => {navigation.navigate('SignUp')}}>
           {
             loginState.login === true ? null  
-            : <Text style={loginStyle.signUp}>회원가입</Text>
+            : <Text style={loginStyles.signUp}>회원가입</Text>
           }
         </TouchableOpacity>
       </View>

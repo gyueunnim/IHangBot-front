@@ -1,16 +1,17 @@
 import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { useState, useEffect } from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { styles } from '../css/reportSetStyles';
-import { commonStyle } from '../css/commonStyle';
-import { signUpStyle } from '../css/signUpStyles';
-import { useSelector } from 'react-redux';
 import { RadioButton } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+/* css */
+import { reportStyles } from '../css/reportSetStyles';
+import { commonStyles } from '../css/commonStyle';
+import { signUpStyles } from '../css/signUpStyles';
 
 function Setting({navigation}) {
   const loginState = useSelector((state) => state.loginState);
-
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [pw, setPw] = useState('');
@@ -19,7 +20,6 @@ function Setting({navigation}) {
   const [pwCheckErr, setPwCheckErr] = useState(0);
   const [initialInfo, setInitialInfo] = useState({name: '', gender: '', age: ''});
   const [settingErr, setSettingErr] = useState(0);
-
   const [settingchange, setSettingChange] = useState(false);
   
   const requestSetting = () => {
@@ -65,80 +65,80 @@ function Setting({navigation}) {
         setGender(response.data.data.child_gender);
       })
       .catch((error) => console.log(error));
-  }, [])
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Ionicons style={styles.icon} name='person-circle-outline' size={100} color='black' />
-        <Text style={styles.iconTitle}>프로필 수정</Text>
+    <View style={reportStyles.container}>
+      <View style={reportStyles.content}>
+        <Ionicons style={reportStyles.icon} name='person-circle-outline' size={100} color='black' />
+        <Text style={reportStyles.iconTitle}>프로필 수정</Text>
       </View>
 
-      <View style={styles.middle}>
+      <View style={reportStyles.middle}>
         <View>
-          <Text style={commonStyle.title}>아이 이름</Text>
-          <TextInput placeholder="아이 이름을 입력하세요" defaultValue={name} onChangeText={(value) => setName(value)} style={commonStyle.form} />
+          <Text style={commonStyles.title}>아이 이름</Text>
+          <TextInput placeholder="아이 이름을 입력하세요" defaultValue={name} onChangeText={(value) => setName(value)} style={commonStyles.form} />
         </View>
 
-        <View style={signUpStyle.fx}>
+        <View style={signUpStyles.fx}>
           <View>
-            <View style={signUpStyle.fx}>
-              <Text style={commonStyle.title}>성별 </Text>
-              <Text style={signUpStyle.highlight}>*</Text>
+            <View style={signUpStyles.fx}>
+              <Text style={commonStyles.title}>성별 </Text>
+              <Text style={signUpStyles.highlight}>*</Text>
             </View>
-            <View style={signUpStyle.fx}>
-              <View style={signUpStyle.fx}>
+            <View style={signUpStyles.fx}>
+              <View style={signUpStyles.fx}>
                 <RadioButton status={gender === true ? "checked" : "unchecked"} onPress={() => setGender(true)} />
-                <Text style={signUpStyle.radioText}>남자</Text>
+                <Text style={signUpStyles.radioText}>남자</Text>
               </View>
-              <View style={signUpStyle.fx}>
+              <View style={signUpStyles.fx}>
                 <RadioButton status={gender === false ? "checked" : "unchecked"} onPress={() => setGender(false)} />
-                <Text style={signUpStyle.radioText}>여자</Text>
+                <Text style={signUpStyles.radioText}>여자</Text>
               </View>
             </View>
           </View>
 
           <View>
-            <View style={signUpStyle.formAge}>
-              <Text style={commonStyle.title}>나이 </Text>
-              <Text style={signUpStyle.highlight}>*</Text>
+            <View style={signUpStyles.formAge}>
+              <Text style={commonStyles.title}>나이 </Text>
+              <Text style={signUpStyles.highlight}>*</Text>
             </View>
-            <TextInput placeholder="아이의 나이" defaultValue={age.toString()} onChangeText={(value) => setAge(value)} style={signUpStyle.fxForm} />
+            <TextInput placeholder="아이의 나이" defaultValue={age.toString()} onChangeText={(value) => setAge(value)} style={signUpStyles.fxForm} />
           </View>  
         </View>
 
         <View>
-          <Text style={commonStyle.title}>비밀번호 변경</Text>
-          <TextInput placeholder="변경하실 비밀번호를 입력하세요" secureTextEntry={true} onChangeText={(value) => setPw(value)} style={commonStyle.form} />
+          <Text style={commonStyles.title}>비밀번호 변경</Text>
+          <TextInput placeholder="변경하실 비밀번호를 입력하세요" secureTextEntry={true} onChangeText={(value) => setPw(value)} style={commonStyles.form} />
         </View>
-        <View style={signUpStyle.fx}>
-          <Text style={commonStyle.title}>비밀번호 확인</Text>
+        <View style={signUpStyles.fx}>
+          <Text style={commonStyles.title}>비밀번호 확인</Text>
           {
-            pwCheckErr !== 0 ? (pwCheckErr === 1 ? <Text style={commonStyle.error} >비밀번호가 일치하지 않습니다</Text> : <Text style={signUpStyle.pwPass} >비밀번호가 일치합니다</Text>) : null
+            pwCheckErr !== 0 ? (pwCheckErr === 1 ? <Text style={commonStyles.error} >비밀번호가 일치하지 않습니다</Text> : <Text style={signUpStyles.pwPass} >비밀번호가 일치합니다</Text>) : null
           }
         </View>
-        <TextInput placeholder="비밀번호를 다시 한번 입력하세요" onChangeText={(value) => setPwCheck(value)} secureTextEntry={true} style={commonStyle.form} />
+        <TextInput placeholder="비밀번호를 다시 한번 입력하세요" onChangeText={(value) => setPwCheck(value)} secureTextEntry={true} style={commonStyles.form} />
         <TouchableOpacity onPress={() => requestSetting()}>
-          <Text style={(settingchange) ? commonStyle.active: commonStyle.btn}>수정하기</Text>          
+          <Text style={(settingchange) ? commonStyles.active: commonStyles.btn}>수정하기</Text>          
         </TouchableOpacity>
         {
           settingErr === 0 ? null
-          : (settingErr === 1 ? <Text style={signUpStyle.pwErr}>수정에 실패하였습니다</Text> : <Text style={signUpStyle.pwPass}>수정에 성공하였습니다</Text>)
+          : (settingErr === 1 ? <Text style={commonStyles.error}>수정에 실패하였습니다</Text> : <Text style={signUpStyles.pwPass}>수정에 성공하였습니다</Text>)
         }
       </View>
 
-      <View style={commonStyle.bottomTextContainer}>
-        <View style={commonStyle.bottomText}>
+      <View style={commonStyles.bottomTextContainer}>
+        <View style={commonStyles.bottomText}>
           <TouchableOpacity>
             <Ionicons name='newspaper-outline' size={32} color='white'  onPress={() => {navigation.navigate('Report')}} />
           </TouchableOpacity>
         </View>
-        <View style={commonStyle.bottomText}>
+        <View style={commonStyles.bottomText}>
           <TouchableOpacity onPress={() => navigation.navigate('ChatBot')}>
             <Ionicons name='home-outline' size={32} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={commonStyle.bottomText}>
+        <View style={commonStyles.bottomText}>
           <TouchableOpacity>
             <Ionicons name='person-circle' size={32} color='white' />
           </TouchableOpacity>

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const commonStyle = StyleSheet.create({
+export const commonStyles = StyleSheet.create({
     title: {
         paddingTop: 7,
         paddingLeft: 0,
