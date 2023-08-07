@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 import { loginStyle } from '../css/loginStyles';
+import { commonStyle } from '../css/commonStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLoginState } from '../redux/logInfo';
 import { CommonActions } from '@react-navigation/routers';
@@ -30,6 +31,10 @@ function Login({navigation}) {
       setDefaultInput(null);
     }
   }, [])
+
+  useEffect(() => {
+    setLoginErr(false);
+  }, [id, pw])
 
   const requestLogin = () => {
     axios.get(`http://52.79.225.144:8080/member/login`, { params: loginInfo })
@@ -74,23 +79,23 @@ function Login({navigation}) {
           : <Text style={loginStyle.goReport}>보고서 화면으로 이동합니다</Text>
         }
         <View style={{flexDirection: 'row'}}>
-          <Text style={loginStyle.title}>아이디</Text>
+          <Text style={commonStyle.title}>아이디</Text>
           {
-            loginErr === true ? <Text style={loginStyle.loginError}>로그인에 실패하였습니다</Text> : null
+            loginErr === true ? <Text style={commonStyle.error}>로그인에 실패하였습니다</Text> : null
           }
         </View>
-        <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} defaultValue={defaultInput} style={loginStyle.form} />
+        <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} defaultValue={defaultInput} style={commonStyle.form} />
         <View style={{flexDirection: 'row'}}>
-        <Text style={loginStyle.title}>비밀번호</Text>
+        <Text style={commonStyle.title}>비밀번호</Text>
         {
           loginState.login === false ? null : (pw === '' ? <Text style={loginStyle.goReportText}>비밀번호를 입력해주세요</Text> : null)
         }
         </View>
-        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={loginStyle.form} />
+        <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={commonStyle.form} />
       </View>
       <View>
         <TouchableOpacity onPress={() => requestLogin()}>
-          <Text style={(id !== '' && pw !== '') ? loginStyle.active : loginStyle.btn}>로그인</Text>
+          <Text style={(id !== '' && pw !== '') ? commonStyle.active : commonStyle.btn}>로그인</Text>
         </TouchableOpacity>
       </View>
       <View>

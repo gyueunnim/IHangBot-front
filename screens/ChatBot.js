@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button, Dimensions, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { useState, useEffect } from 'react';
 import { startRecording, stopRecording, playSound } from '../modules/audio';
 import stt from '../modules/stt';

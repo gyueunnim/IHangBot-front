@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
   userChat: {
     marginTop: 25,
     backgroundColor: '#74c0fc',
-    flex: 1.3,
+    flex: 1.5,
     padding: 10,
   },
   gptChat: {
     backgroundColor: "#a5d8ff",
-    flex: 1.3,
+    flex: 1.5,
     padding: 10,
   },
   recordBox: {
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 17.5,
     color: '#5b5b5b',
-    width: width - 50,
+    width: width - 55,
     flexWrap: 'wrap',
   }
 });
