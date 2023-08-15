@@ -9,6 +9,7 @@ import SignUp from './screens/SignUp';
 import ChatBot from './screens/ChatBot';
 import Report from './screens/Report';
 import Setting from './screens/Setting';
+import Tutorial from './screens/Tutorial';
 
 /* redux */
 import logInfo from './redux/logInfo';
@@ -19,9 +20,10 @@ export default function App() {
   return (
     <Provider store={logInfo}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Tutorial">
           <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
           <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
+          <Stack.Screen name="Tutorial" component={Tutorial} options={{ headerShown: false }} />
           <Stack.Screen name="ChatBot" component={ChatBot} options={{headerShown: false}} />
           <Stack.Screen
             name="Report"

@@ -69,6 +69,14 @@ export default function ChatBot({navigation}) {
   };
 
   useEffect(() => {
+    axios.get(`http://52.79.225.144:8080/member/${loginState.id}/profile`)
+      .then((response) => {
+        setGptChat({text: `${response.data.data.child_name}! 기다리고 있었어 ^~^\n오늘은 무슨일이 있었니?`})
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
     return sound
       ? () => {
           console.log('Unloading Sound');
@@ -81,7 +89,7 @@ export default function ChatBot({navigation}) {
     <View style={chatbotStyles.container}>
       <View style={chatbotStyles.userChat}>
         <View style={chatbotStyles.fx}>
-          <Image source={require('../assets/child_Icon.png')} style={chatbotStyles.Icon} />
+          <Image source={require('../assets/child2_icon.png')} style={chatbotStyles.Icon} />
           <TouchableOpacity onPress={() => {handlePlaySound(userChat.uri)}}>
             {
               userChat.text === null ? null
@@ -96,7 +104,7 @@ export default function ChatBot({navigation}) {
       </View>
       <View style={chatbotStyles.gptChat}>
         <View style={chatbotStyles.fx}>
-          <Image source={require('../assets/chatbot_Icon.png')} style={chatbotStyles.Icon} />
+          <Image source={require('../assets/robot_icon.png')} style={chatbotStyles.Icon} />
           <TouchableOpacity onPress={() => {handlePlaySound(gptChat.uri)}}>
             {
               chatTextMaking === true ? <Text style={chatbotStyles.text}>대답을 생각하는 중...</Text>
@@ -108,7 +116,7 @@ export default function ChatBot({navigation}) {
       <View  style={chatbotStyles.recordBox}>
         <TouchableOpacity onPress={recording ? handleStopRecording : handleStartRecording}
           onLongPress={() => navigation.navigate("Login")} delayLongPress={3000}>
-            <Image source={require('../assets/input_Icon.png')} style={chatbotStyles.recordBtn}/>
+            <Image source={require('../assets/input_icon3.png')} style={chatbotStyles.recordBtn}/>
         </TouchableOpacity>
       </View>
     </View>

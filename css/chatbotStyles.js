@@ -32,8 +32,8 @@ export const chatbotStyles = StyleSheet.create({
     height: 125,
   },
   Icon: {
-    width: 25,
-    height: 25,
+    width: 50,
+    height: 50,
     marginRight: 10,
   },
   fx: {
