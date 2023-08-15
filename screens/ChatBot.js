@@ -93,7 +93,7 @@
 
     return (
       <View style={chatbotStyles.container}>
-        <TouchableOpacity onPress={}>
+        <TouchableOpacity onPress={() => {navigation.navigate('Using')}}>
           <View style={chatbotStyles.using}>
             <Image source={require('../assets/using.png')} style={[chatbotStyles.Icon]} />
           </View>

@@ -10,6 +10,7 @@ import ChatBot from './screens/ChatBot';
 import Report from './screens/Report';
 import Setting from './screens/Setting';
 import Tutorial from './screens/Tutorial';
+import Using from './screens/Using';
 
 /* redux */
 import logInfo from './redux/logInfo';
@@ -25,6 +26,7 @@ export default function App() {
           <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
           <Stack.Screen name="Tutorial" component={Tutorial} options={{ headerShown: false }} />
           <Stack.Screen name="ChatBot" component={ChatBot} options={{headerShown: false}} />
+          <Stack.Screen name="Using" component={Using} options={{headerShown: false}} />
           <Stack.Screen
             name="Report"
             component={Report}
