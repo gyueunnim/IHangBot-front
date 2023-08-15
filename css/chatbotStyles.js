@@ -9,6 +9,7 @@ export const chatbotStyles = StyleSheet.create({
     width: width,
     height: height,
     paddingTop: 75,
+    marginTop: 7.5,
   },
   userChat: {
     marginTop: 25,
@@ -44,5 +45,10 @@ export const chatbotStyles = StyleSheet.create({
     color: '#5b5b5b',
     width: width - 55,
     flexWrap: 'wrap',
+  },
+  using: {
+    position: 'absolute',
+    right: 0,
+    top: -32.5,
   }
 });
