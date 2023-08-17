@@ -45,7 +45,8 @@ export const chartStyles = StyleSheet.create({
     count: {
         position: 'absolute',
         right: 0,
-        fontSize: 15
+        fontSize: 15,
+        top: 10,
     },
     line: {
         flex: 1,
