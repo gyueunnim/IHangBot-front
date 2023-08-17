@@ -129,7 +129,7 @@
 
         <View  style={chatbotStyles.recordBox}>
           <TouchableOpacity onPress={recording ? handleStopRecording : handleStartRecording}
-            onLongPress={() => navigation.navigate("Login")} delayLongPress={3000}> 
+            onLongPress={() => navigation.navigate("MoveToReport")} delayLongPress={3000}> 
             {
               userRecording === true ? 
               <Image source={require('../assets/recording.png')} style={chatbotStyles.recordBtn}/>

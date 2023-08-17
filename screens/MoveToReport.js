@@ -1,7 +1,6 @@
 import { Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setLoginState } from '../redux/logInfo';
+import { useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/routers';
 import axios from 'axios';
 
@@ -10,14 +9,12 @@ import { loginStyles } from '../css/loginStyles';
 import { commonStyles } from '../css/commonStyle';
 
 
-function Login({navigation}) {
+function MoveToReport({navigation}) {
   const loginState = useSelector((state) => state.loginState);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [loginErr, setLoginErr] = useState(false);
   const [defaultInput, setDefaultInput] = useState(null);
-
-  const dispatch = useDispatch();
 
   const loginInfo = {
     "username": id, 
@@ -55,22 +52,14 @@ function Login({navigation}) {
 
   const successLogin = () => {
     setLoginErr(false);
-    dispatch(setLoginState(id));
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1, 
-        routes: [
-          { name: 'ChatBot' },
-        ],
-      })
-    );
+    navigation.dispatch(CommonActions.navigate('Report'));
   };
     
   return (
     <View style={loginStyles.container}>
       <View>
         <Image source={require('../assets/mainLogo.png')} style={loginStyles.icon}></Image>
-        <Text style={loginStyles.iconText}>로그인이 필요한 서비스입니다</Text>
+        <Text style={loginStyles.goReport}>보고서 화면으로 이동합니다</Text>
         <View style={{flexDirection: 'row'}}>
           <Text style={commonStyles.title}>아이디</Text>
           {
@@ -79,7 +68,10 @@ function Login({navigation}) {
         </View>
         <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} defaultValue={defaultInput} style={commonStyles.form} />
         <View style={{flexDirection: 'row'}}>
-          <Text style={commonStyles.title}>비밀번호</Text>
+        <Text style={commonStyles.title}>비밀번호</Text>
+        {
+          pw === '' ? <Text style={loginStyles.goReportText}>비밀번호를 입력해주세요</Text> : null
+        }
         </View>
         <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} defaultValue={pw}secureTextEntry={true} style={commonStyles.form} />
       </View>
@@ -88,13 +80,8 @@ function Login({navigation}) {
           <Text style={(id !== '' && pw !== '') ? commonStyles.active : commonStyles.btn}>로그인</Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <TouchableOpacity onPress={() => {navigation.navigate('SignUp')}}>
-          <Text style={loginStyles.signUp}>회원가입</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   )
 }
 
-export default Login;
+export default MoveToReport;

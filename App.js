@@ -11,6 +11,7 @@ import Report from './screens/Report';
 import Setting from './screens/Setting';
 import Tutorial from './screens/Tutorial';
 import Using from './screens/Using';
+import MoveToReport from './screens/MoveToReport';
 
 /* redux */
 import logInfo from './redux/logInfo';
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="Tutorial" component={Tutorial} options={{ headerShown: false }} />
           <Stack.Screen name="ChatBot" component={ChatBot} options={{headerShown: false}} />
           <Stack.Screen name="Using" component={Using} options={{headerShown: false}} />
+          <Stack.Screen name="MoveToReport" component={MoveToReport} options={{headerShown: false}} />
           <Stack.Screen
             name="Report"
             component={Report}

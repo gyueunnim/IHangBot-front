@@ -97,7 +97,6 @@ function Report({navigation}) {
         :
           loading === 0 
           ? <View style={chartStyles.loading}>
-
               <Spinner visible={loading === 0 ? true : false} textContent={'분석중 입니다...\n잠시만 기다려 주세요'} textStyle={{ color: '#FFF', fontSize: 20, height: 75, textAlign: 'center'}} />
             </View> 
           : <View>
