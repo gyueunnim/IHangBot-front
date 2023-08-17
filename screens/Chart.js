@@ -75,7 +75,7 @@ function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestio
 
       <View>
         <Text style={chartStyles.title}>부모님께 드리는 제안</Text>
-        <Text style={chartStyles.suggestion}>{suggestion.slice(1, -1)}</Text>
+        <Text style={chartStyles.suggestion}>{suggestion}</Text>
       </View>
     </View>
   )

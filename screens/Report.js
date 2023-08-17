@@ -87,7 +87,7 @@ function Report({navigation}) {
 
   return (
     <View style={reportStyles.container}>
-      <ScrollView>
+      <ScrollView style={reportStyles.scrollContainer}>
       {
         loading === 1 ?
         <View>

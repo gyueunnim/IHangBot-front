@@ -7,7 +7,6 @@ export const reportStyles = StyleSheet.create({
     width: width,
     height: height,
     backgroundColor: 'white',
-    padding: 40,
     paddingTop: 75,
     flex: 1,
   },
@@ -30,5 +29,9 @@ export const reportStyles = StyleSheet.create({
   },
   middle: {
     flex: 3,
+  },
+  scrollContainer: {
+    paddingLeft: 40,
+    paddingRight: 40,
   }
 });

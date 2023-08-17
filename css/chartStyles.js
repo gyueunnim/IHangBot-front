@@ -70,7 +70,7 @@ export const chartStyles = StyleSheet.create({
     },
     suggestion: {
         fontSize: 15,
-        paddingBottom: 30,
+        paddingBottom: 75,
         fontWeight: '500',
     },
     loading: {
