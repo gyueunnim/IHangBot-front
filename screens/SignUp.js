@@ -16,6 +16,7 @@ function SignUp({navigation}) {
   const [gender, setGender] = useState(true);
   const [idCheckErr, setIdCheckErr] = useState(false);
   const [pwCheckErr, setPwCheckErr] = useState(0);
+  const [checkTemplate, setCheckTemplate] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
   const userInfo = {
     "username": id,
@@ -27,6 +28,10 @@ function SignUp({navigation}) {
   };
 
   useEffect(() => {
+    name !== '' && id !== '' && pw !== '' && pwCheck !== '' && age !== '' ? setCheckTemplate(true) : setCheckTemplate(false)
+  }, [name, id, pw, pwCheck, age]);
+
+  useEffect(() => {
     pwCheck !== '' ? (pw !== pwCheck ? setPwCheckErr(1)  : setPwCheckErr(2)) 
     : setPwCheckErr(0);
   }, [pw, pwCheck]);
@@ -36,17 +41,21 @@ function SignUp({navigation}) {
   }, [id]);
 
   const requestSignUp = async () => {
-    if(pwCheckErr === 2) {
-      axios.post('http://52.79.225.144:8080/member/signUp', userInfo)
-        .then((response) => {          
-          successSignUp(); 
-        })
-        .catch((error) => { // 이미 존재하는 아이디
-          setIdCheckErr(true);
-          failSignUp();
-        });
+    if(checkTemplate == true) {
+      if(pwCheckErr === 2) {
+        axios.post('http://52.79.225.144:8080/member/signUp', userInfo)
+          .then((response) => {          
+            successSignUp(); 
+          })
+          .catch((error) => { // 이미 존재하는 아이디
+            setIdCheckErr(true);
+            failSignUp();
+          });
+      } else {
+        failSignUp(); // 비밀번호 일치하지 않을 때
+      }
     } else {
-      failSignUp(); // 비밀번호 일치하지 않을 때
+      failSignUp(); // 빈 칸이 존재할 때
     }
   };
 
@@ -77,7 +86,7 @@ function SignUp({navigation}) {
             <Text style={signUpStyles.highlight}>*</Text>
             {
               idCheckErr === false ? null
-              : <Text style={signUpStyles.pwErr} >이미 존재하는 아이디 입니다</Text>
+              : <Text style={commonStyles.error} >이미 존재하는 아이디 입니다</Text>
             }
           </View>
           <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} style={commonStyles.form} />
@@ -127,7 +136,7 @@ function SignUp({navigation}) {
 
         <View>
           <TouchableOpacity onPress={() => requestSignUp()}> 
-          <Text style={(name !== '' && id !== '' && pw !== '' && pwCheck !== '' && age !== '') ? commonStyles.active : commonStyles.btn}>회원가입</Text>
+          <Text style={checkTemplate ? commonStyles.active : commonStyles.btn}>회원가입</Text>
             {
             signUpErr === false ? null
             : <Text style={commonStyles.error}>회원가입에 실패하였습니다 - 다시 시도해주세요</Text> 
