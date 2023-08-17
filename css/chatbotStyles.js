@@ -43,7 +43,7 @@ export const chatbotStyles = StyleSheet.create({
   text: {
     fontSize: 17.5,
     color: '#5b5b5b',
-    width: width - 55,
+    width: width - 90,
     flexWrap: 'wrap',
   },
   using: {
