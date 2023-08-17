@@ -64,6 +64,7 @@
         await handlePlaySound(ttsResponseUri);
       })
       .catch(async (error) => {
+        console.log(error);
         setChatTextMaking(false);
         const ttsResponseUri = await tts('다시 한번 말해줘!');
         setGptChat({
@@ -98,6 +99,18 @@
             <Image source={require('../assets/using.png')} style={[chatbotStyles.Icon]} />
           </View>
         </TouchableOpacity>
+        <View style={chatbotStyles.gptChat}>
+          <View style={chatbotStyles.fx}>
+            <Image source={require('../assets/robot_icon.png')} style={chatbotStyles.Icon} />
+            <TouchableOpacity onPress={() => {handlePlaySound(gptChat.uri)}}>
+              {
+                chatTextMaking === true ? <Text style={chatbotStyles.text}>대답을 생각하는 중...</Text>
+                : <Text style={chatbotStyles.text}>{gptChat.text}</Text>
+              }
+            </TouchableOpacity>
+          </View>
+        </View>
+        
         <View style={chatbotStyles.userChat}>
           <View style={chatbotStyles.fx}>
             <Image source={require('../assets/child2_icon.png')} style={chatbotStyles.Icon} />
@@ -113,17 +126,7 @@
             </TouchableOpacity>
           </View>
         </View>
-        <View style={chatbotStyles.gptChat}>
-          <View style={chatbotStyles.fx}>
-            <Image source={require('../assets/robot_icon.png')} style={chatbotStyles.Icon} />
-            <TouchableOpacity onPress={() => {handlePlaySound(gptChat.uri)}}>
-              {
-                chatTextMaking === true ? <Text style={chatbotStyles.text}>대답을 생각하는 중...</Text>
-                : <Text style={chatbotStyles.text}>{gptChat.text}</Text>
-              }
-            </TouchableOpacity>
-          </View>
-        </View>
+
         <View  style={chatbotStyles.recordBox}>
           <TouchableOpacity onPress={recording ? handleStopRecording : handleStartRecording}
             onLongPress={() => navigation.navigate("Login")} delayLongPress={3000}> 

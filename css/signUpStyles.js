@@ -31,7 +31,7 @@ export const signUpStyles = StyleSheet.create({
       paddingBottom: 2.5,
       marginTop: 5,
       color: '#3f6ad7',
-      fontWeight: 'bold',
+      fontWeight: '500',
       textAlign: 'right',
     },
     formAge: {

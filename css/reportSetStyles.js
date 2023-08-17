@@ -33,5 +33,13 @@ export const reportStyles = StyleSheet.create({
   scrollContainer: {
     paddingLeft: 40,
     paddingRight: 40,
+  },
+  settingContainer: {
+    width: width,
+    height: height,
+    backgroundColor: 'white',
+    paddingTop: 75,
+    flex: 1,
+    padding: 40,
   }
 });

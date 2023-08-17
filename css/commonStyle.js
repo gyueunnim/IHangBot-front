@@ -46,7 +46,7 @@ export const commonStyles = StyleSheet.create({
         paddingBottom: 2.5,
         marginTop: 5,
         color: '#cc0000',
-        fontWeight: 'bold',
+        fontWeight: '500',
         textAlign: 'right',
     },
     bottomTextContainer: {

@@ -68,7 +68,7 @@ function Setting({navigation}) {
   }, []);
 
   return (
-    <View style={reportStyles.container}>
+    <View style={reportStyles.settingContainer}>
       <View style={reportStyles.content}>
         <Ionicons style={reportStyles.icon} name='person-circle-outline' size={100} color='black' />
         <Text style={reportStyles.iconTitle}>프로필 수정</Text>

@@ -12,12 +12,12 @@ export const chatbotStyles = StyleSheet.create({
     marginTop: 7.5,
   },
   userChat: {
-    marginTop: 25,
     backgroundColor: '#74c0fc',
     flex: 1.5,
     padding: 10,
   },
   gptChat: {
+    marginTop: 25,
     backgroundColor: "#a5d8ff",
     flex: 1.5,
     padding: 10,

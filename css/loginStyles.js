@@ -39,7 +39,6 @@ export const loginStyles = StyleSheet.create({
     fontWeight: 'bold', 
     fontSize: 12,
     color: '#3f6ad7',
-    fontWeight: 'bold',
   },
   goReportText: {
     flex: 1,
@@ -48,7 +47,7 @@ export const loginStyles = StyleSheet.create({
     paddingBottom: 2.5,
     marginTop: 5,
     color: '#528638',
-    fontWeight: 'bold',
+    fontWeight: '500',
     textAlign: 'right',
   },
 })

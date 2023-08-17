@@ -3,6 +3,7 @@ import Swiper from 'react-native-swiper';
 import { useState, useEffect, useRef } from 'react';
 
 import { tutorialStyles } from '../css/tutorialStyles';
+import { usingStyles } from '../css/usingStyles';
 
 function Tutorial({navigation}) {
   const [index, setIndex] = useState(0);
@@ -68,8 +69,11 @@ function Tutorial({navigation}) {
           <Text style={tutorialStyles.title}>레포트 제공</Text>
           <Text style={tutorialStyles.text}>아이의 대화를 분석하여</Text>
           <Text style={tutorialStyles.text}>관심사와 감정을 레포트로 제공합니다</Text>
-          <TouchableOpacity onPress={() => {navigation.navigate('Login')}}>
-          <Text style={tutorialStyles.btn}>시작하기</Text>
+          <TouchableOpacity onPress={() => {
+            console.log('시작하기 누름');
+            navigation.navigate('Login');
+          }}>
+          <Text style={usingStyles.btn}>시작하기</Text>
         </TouchableOpacity>
         </Animated.View>
         
