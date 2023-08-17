@@ -9,9 +9,9 @@ const url = 'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts';
 export default async function tts(chatResponse) {
 	try {
 		const formData = { 
-			speaker: 'ndain',
+			speaker: 'nhajun',
 			volume: '0', 
-			speed: '-2', 
+			speed: '-1', 
 			pitch: '0', 
 			text: chatResponse, 
 			format: 'mp3' 
