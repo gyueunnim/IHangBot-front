@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 /* screens */
 import Chart from './Chart';
@@ -96,8 +97,8 @@ function Report({navigation}) {
         :
           loading === 0 
           ? <View style={chartStyles.loading}>
-              <Text style={chartStyles.loadText}>분석중 입니다...</Text>
-              <Text style={chartStyles.loadText}>잠시만 기다려주세요</Text>
+
+              <Spinner visible={loading === 0 ? true : false} textContent={'분석중 입니다...\n잠시만 기다려 주세요'} textStyle={{ color: '#FFF', fontSize: 20, height: 75, textAlign: 'center'}} />
             </View> 
           : <View>
               <Text style={chartStyles.main}>{name}님의 위클리 보고서</Text>

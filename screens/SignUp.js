@@ -83,7 +83,7 @@ function SignUp({navigation}) {
           <TextInput placeholder="아이디를 입력하세요" onChangeText={(value) => setId(value)} style={commonStyles.form} />
 
           <View style={signUpStyles.fx}>
-            <Text style={signUpStyles.title}>비밀번호 </Text>
+            <Text style={commonStyles.title}>비밀번호 </Text>
             <Text style={signUpStyles.highlight}>*</Text>
           </View>
           <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} secureTextEntry={true} style={commonStyles.form} />

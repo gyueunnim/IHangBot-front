@@ -55,8 +55,8 @@ function Tutorial({navigation}) {
         </View>
         <Animated.View style={{opacity: fadeAnims[1]}}>
           <Text style={tutorialStyles.title}>챗봇 기능 제공</Text>
-          <Text style={tutorialStyles.text}>아이와 챗봇의 대화를 제공합니다.</Text>
-          <Text style={tutorialStyles.text}>아이의 관심사와 감정을 추출합니다.</Text>
+          <Text style={tutorialStyles.text}>아이와 챗봇의 대화를 제공합니다</Text>
+          <Text style={tutorialStyles.text}>아이의 관심사와 감정을 추출합니다</Text>
         </Animated.View>
       </View>
       <View style={tutorialStyles.slide}>
@@ -67,7 +67,7 @@ function Tutorial({navigation}) {
         <Animated.View style={{opacity: fadeAnims[2]}}>
           <Text style={tutorialStyles.title}>레포트 제공</Text>
           <Text style={tutorialStyles.text}>아이의 대화를 분석하여</Text>
-          <Text style={tutorialStyles.text}>관심사와 감정을 보고서로 제공합니다.</Text>
+          <Text style={tutorialStyles.text}>관심사와 감정을 레포트로 제공합니다</Text>
           <TouchableOpacity onPress={() => {navigation.navigate('Login')}}>
           <Text style={tutorialStyles.btn}>시작하기</Text>
         </TouchableOpacity>
