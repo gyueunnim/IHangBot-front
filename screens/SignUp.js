@@ -16,6 +16,7 @@ function SignUp({navigation}) {
   const [gender, setGender] = useState(true);
   const [idCheckErr, setIdCheckErr] = useState(false);
   const [pwCheckErr, setPwCheckErr] = useState(0);
+  const [pwLen, setPwLen] = useState(0);
   const [checkTemplate, setCheckTemplate] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
   const userInfo = {
@@ -28,13 +29,17 @@ function SignUp({navigation}) {
   };
 
   useEffect(() => {
-    name !== '' && id !== '' && pw !== '' && pwCheck !== '' && age !== '' ? setCheckTemplate(true) : setCheckTemplate(false)
-  }, [name, id, pw, pwCheck, age]);
+    name !== '' && id !== '' && pw !== '' && pwCheck !== '' && age !== '' && pwLen >= 8 ? setCheckTemplate(true) : setCheckTemplate(false)
+  }, [name, id, pw, pwCheck, age, pwLen]);
 
   useEffect(() => {
     pwCheck !== '' ? (pw !== pwCheck ? setPwCheckErr(1)  : setPwCheckErr(2)) 
     : setPwCheckErr(0);
   }, [pw, pwCheck]);
+
+  useEffect(() => {
+    setPwLen(pw.length);
+  }, [pw])
 
   useEffect(() => {
     setIdCheckErr(false);
@@ -94,8 +99,11 @@ function SignUp({navigation}) {
           <View style={signUpStyles.fx}>
             <Text style={commonStyles.title}>비밀번호 </Text>
             <Text style={signUpStyles.highlight}>*</Text>
+            {
+              0 < pwLen && pwLen < 8 ? <Text style={commonStyles.error}>8자리 이상 입력해주세요</Text> : null
+            }
           </View>
-          <TextInput placeholder="비밀번호를 입력하세요" onChangeText={(value) => setPw(value)} secureTextEntry={true} style={commonStyles.form} />
+          <TextInput placeholder="비밀번호를 8자리 이상 입력하세요" onChangeText={(value) => setPw(value)} secureTextEntry={true} style={commonStyles.form} />
 
           <View style={signUpStyles.fx}>
             <Text style={commonStyles.title}>비밀번호 확인 </Text>
