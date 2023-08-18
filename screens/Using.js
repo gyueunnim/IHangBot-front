@@ -76,7 +76,7 @@ function Using({navigation}) {
           <Image source={require('../assets/input.png')} style={usingStyles.icon} />
         </View>
         <Animated.View style={{opacity: fadeAnims[1]}}>
-          <Text style={usingStyles.explainBottom}>3초간 눌러주세요</Text>
+          <Text style={usingStyles.explainBottom}>2초간 눌러주세요</Text>
           <Text style={usingStyles.text}>이후 아이의 관리자 인증을 위해</Text>
           <Text style={usingStyles.text}>로그인 페이지로 이동합니다</Text>
         </Animated.View>

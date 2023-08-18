@@ -11,7 +11,7 @@
   /* css */
   import { chatbotStyles } from '../css/chatbotStyles';
 
-
+  
   export default function ChatBot({navigation}) {
     const loginState = useSelector((state) => state.loginState);
     const [sound, setSound] = useState();
@@ -94,11 +94,13 @@
 
     return (
       <View style={chatbotStyles.container}>
-        <TouchableOpacity onPress={() => {navigation.navigate('Using')}}>
-          <View style={chatbotStyles.using}>
-            <Image source={require('../assets/using.png')} style={[chatbotStyles.Icon]} />
-          </View>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={() => {navigation.navigate('Using')}}>
+            <View style={chatbotStyles.using}>
+              <Image source={require('../assets/using.png')} style={[chatbotStyles.Icon]} />
+            </View>
+          </TouchableOpacity>
+        </View>
         <View style={chatbotStyles.gptChat}>
           <View style={chatbotStyles.fx}>
             <Image source={require('../assets/robot_icon.png')} style={chatbotStyles.Icon} />
@@ -129,7 +131,7 @@
 
         <View  style={chatbotStyles.recordBox}>
           <TouchableOpacity onPress={recording ? handleStopRecording : handleStartRecording}
-            onLongPress={() => navigation.navigate("MoveToReport")} delayLongPress={3000}> 
+            onLongPress={() => navigation.navigate("MoveToReport")} delayLongPress={2000}> 
             {
               userRecording === true ? 
               <Image source={require('../assets/recording.png')} style={chatbotStyles.recordBtn}/>
