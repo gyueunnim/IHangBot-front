@@ -16,6 +16,7 @@ function SignUp({navigation}) {
   const [gender, setGender] = useState(true);
   const [idCheckErr, setIdCheckErr] = useState(false);
   const [pwCheckErr, setPwCheckErr] = useState(0);
+  const [ageCheckErr, setAgeCheckErr] = useState(false);
   const [pwLen, setPwLen] = useState(0);
   const [checkTemplate, setCheckTemplate] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
@@ -39,11 +40,18 @@ function SignUp({navigation}) {
 
   useEffect(() => {
     setPwLen(pw.length);
-  }, [pw])
+  }, [pw]);
 
   useEffect(() => {
     setIdCheckErr(false);
   }, [id]);
+
+  useEffect(() => {
+    /^\d+$/.test(age) ? setAgeCheckErr(false) : setAgeCheckErr(true)
+    if (age === '') {
+      setAgeCheckErr(false);
+    }
+  }, [age])
 
   const requestSignUp = async () => {
     if(checkTemplate == true) {
@@ -53,7 +61,9 @@ function SignUp({navigation}) {
             successSignUp(); 
           })
           .catch((error) => { // 이미 존재하는 아이디
-            setIdCheckErr(true);
+            if(setIdCheckErr) {
+              setIdCheckErr(true);
+            }
             failSignUp();
           });
       } else {
@@ -109,7 +119,9 @@ function SignUp({navigation}) {
             <Text style={commonStyles.title}>비밀번호 확인 </Text>
             <Text style={signUpStyles.highlight}>*</Text>
             {
-              pwCheckErr !== 0 ? (pwCheckErr === 1 ? <Text style={commonStyles.error} >비밀번호가 일치하지 않습니다</Text> : <Text style={signUpStyles.pwPass} >비밀번호가 일치합니다</Text>) : null
+              0 <= pwLen && pwLen < 8 ? null : (
+                pwCheckErr !== 0 ? (pwCheckErr === 1 ? <Text style={commonStyles.error} >비밀번호가 일치하지 않습니다</Text> : <Text style={signUpStyles.pwPass} >비밀번호가 일치합니다</Text>) : null
+              )
             }
           </View>
           <TextInput placeholder="비밀번호를 다시 한번 입력하세요" onChangeText={(value) => setPwCheck(value)} secureTextEntry={true} style={commonStyles.form} />
@@ -136,6 +148,9 @@ function SignUp({navigation}) {
               <View style={signUpStyles.formAge}>
                 <Text style={commonStyles.title}>나이 </Text>
                 <Text style={signUpStyles.highlight}>*</Text>
+                {
+                  !ageCheckErr ? null : <Text style={commonStyles.error}>문자 입력 오류</Text>
+                }
               </View>
               <TextInput placeholder="아이의 나이" onChangeText={(value) => setAge(value)} style={signUpStyles.fxForm} />
             </View>  
