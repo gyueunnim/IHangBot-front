@@ -20,13 +20,17 @@ function Report({navigation}) {
   const [suggestion, setSuggestion] = useState('');
   const [concerns, setConcerns] = useState([]);
   const [keywords, setKeywords] = useState([]);
+  const [sentimentData, setSentimentData] = useState({
+    negData: [],
+    posData: [],
+  });
   const [sentiments, setSentiments] = useState({
     negThisWeek: 0,
     negLastWeek: 0,
     posThisWeek: 0,
     posLastWeek: 0,
   });
-
+  
   const pieChartData = [
     {
       name: "긍정",
@@ -65,10 +69,14 @@ function Report({navigation}) {
         posLastWeek: weekSentimentData.posLastWeek / convertPercentageLastWeek * 100,
         negThisWeek: weekSentimentData.negThisWeek / convertPercentageThisWeek * 100,
         posThisWeek: weekSentimentData.posThisWeek / convertPercentageThisWeek * 100,
-      })
+      });
       setConcerns(response.data.data.concerns);
       setKeywords(response.data.data.keywords);
-      setSuggestion(response.data.data.suggestion)
+      setSuggestion(response.data.data.suggestion);
+      setSentimentData({
+        negData: weekSentimentData.negData,
+        posData: weekSentimentData.posData,
+      })
       setLoading(2);
     })
     .catch((error) => {
@@ -101,7 +109,7 @@ function Report({navigation}) {
             </View> 
           : <View>
               <Text style={chartStyles.main}>{name}님의 위클리 보고서</Text>
-              <Chart pieChartData={pieChartData} stackedBarChartData={stackedBarChartData} keywords={keywords} concerns={concerns} suggestion={suggestion} />
+              <Chart pieChartData={pieChartData} stackedBarChartData={stackedBarChartData} keywords={keywords} concerns={concerns} suggestion={suggestion} sentimentData={sentimentData} />
             </View>
       }
       </ScrollView>

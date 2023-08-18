@@ -7,7 +7,7 @@ import { chatbotStyles } from '../css/chatbotStyles';
 
 function Using({navigation}) {
   const [index, setIndex] = useState(0);
-  const slides = [0, 1, 2];
+  const slides = [0, 1, 2, 3];
   const fadeAnims = slides.map(() => new Animated.Value(0));
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function Using({navigation}) {
           <Image source={require('../assets/input.png')} style={usingStyles.icon} />
         </View>
         <Animated.View style={{opacity: fadeAnims[1]}}>
-          <Text style={usingStyles.explainBottom}>2초간 눌러주세요</Text>
+          <Text style={usingStyles.explainBottom}>2초간 꾹 눌러주세요</Text>
           <Text style={usingStyles.text}>이후 아이의 관리자 인증을 위해</Text>
           <Text style={usingStyles.text}>로그인 페이지로 이동합니다</Text>
         </Animated.View>
@@ -114,13 +114,41 @@ function Using({navigation}) {
             <Text style={usingStyles.reportText}>제안</Text>
           </View>
         </View>
-        <Animated.View style={{opacity: fadeAnims[2]}}>
-          <Text style={usingStyles.text}>아이행봇해를 시작해보세요</Text>
+      </View>
+
+      <View style={usingStyles.slide}>
+        <Animated.View style={{opacity: fadeAnims[3]}}>
+          <View style={usingStyles.mg}>
+            <Text style={usingStyles.title}>레포트 분석</Text>
+            <Text style={usingStyles.text}>레포트는 최근 일주일 간 대화 내역을</Text>
+            <Text style={usingStyles.text}>기반으로 분석합니다</Text>
+          </View>
+          <View style={usingStyles.mg}>
+            <View style={usingStyles.iconBox}>
+              <Image source={require('../assets/keyword.png')} style={usingStyles.reportIconSmall} />
+              <Text style={usingStyles.subTitle}>키워드와 관심사 분석</Text>
+            </View>
+            <Text style={usingStyles.subText}>키워드와 관심사 분석은 하루 단위로 진행됩니다</Text>
+          </View>
+          <View style={usingStyles.mg}>
+            <View style={usingStyles.iconBox}>
+            <Image source={require('../assets/emotion.png')} style={usingStyles.reportIconSmall} />
+              <Text style={usingStyles.subTitle}>감정 분석</Text>
+            </View>
+            <Text style={usingStyles.subText}>아이의 대화 속 감정 분석은 실시간으로 진행됩니다</Text>
+          </View>
+          <View style={usingStyles.mg}>
+            <View style={usingStyles.iconBox}>
+              <Image source={require('../assets/suggestion.png')} style={usingStyles.reportIconSmall} />
+              <Text style={usingStyles.subTitle}>부모님께 드리는 제안</Text>
+            </View>
+            <Text style={usingStyles.subText}>제안은 레포트 페이지로 이동할 때마다 진행됩니다</Text>
+          </View>
+          <Text style={usingStyles.btnText}>아이행봇해를 시작해볼까요?</Text>
           <TouchableOpacity onPress={() => {navigation.navigate('ChatBot')}}>
             <Text style={usingStyles.btn}>시작하기</Text>
           </TouchableOpacity>
         </Animated.View>
-        
       </View>
     </Swiper>
   )

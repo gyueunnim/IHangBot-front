@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 
 /* css */
 import { chartStyles } from '../css/chartStyles';
 
-function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestion}) {
+function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestion, sentimentData}) {
   const sentiment = pieChartData[0].population > pieChartData[1].population;
   
   return (
@@ -36,11 +37,19 @@ function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestio
       </View>
 
       <View>
+
+      </View>
+
+      <View>
         <Text style={chartStyles.title}>이번 주 주요 감정은 {
           sentiment === true ? <Text style={chartStyles.positive}>긍정</Text> 
           : <Text style={chartStyles.negative}>부정</Text>
         } 입니다</Text>
-        <PieChart
+        <Text style={chartStyles.subtitle}>아이의 {
+          sentiment === true ? <Text style={chartStyles.positive}>긍정</Text> 
+          : <Text style={chartStyles.negative}>부정</Text>
+        } 키워드 TOP5</Text>
+        {/* <PieChart
           data={pieChartData}
           width={350}
           height={150}
@@ -51,7 +60,19 @@ function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestio
           backgroundColor={"transparent"}
           paddingLeft={"-5"}
           center={[10, -10]}
-        />
+        /> */}
+        {
+          sentiment === true ? sentimentData.posData.map((a, i) => {
+            return (
+              <Text style={chartStyles.sentimentData} key={i}>{i + 1}.   {a}</Text>
+            )
+          })
+          : sentimentData.negData.map((a, i) => {
+            return (
+              <Text style={chartStyles.sentimentData} key={i}>{i + 1}.   {a}</Text>
+            )
+          })
+        }
       </View>
       <View>
         <Text style={chartStyles.title}>저번 주 대비 감정 추이 비교</Text>

@@ -29,12 +29,10 @@ export const usingStyles = StyleSheet.create({
     },
     subTitle: {
         color: '#000000',
-        fontSize: 25,
+        fontSize: 22.5,
         fontWeight: 'bold',
-        padding: 15,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginBottom: 50,
+        padding: 5,
+        paddingTop: 20,
     },
     text: {
         color: '#000000',
@@ -42,11 +40,17 @@ export const usingStyles = StyleSheet.create({
         fontWeight: 'bold',
         paddingTop: 12.5,
     },
+    subText: {
+        color: '#000000',
+        fontSize: 15,
+        fontWeight: 'bold',
+        paddingTop: 2.5,
+    },
     mainIcon: {
         width: 175,
         height: 175,
         backgroundColor: '#9DD6EB',
-        margin: 5
+        margin: 5,
     },
     icon: {
         width: 125,
@@ -71,9 +75,18 @@ export const usingStyles = StyleSheet.create({
         backgroundColor: '#1c4587',
         borderRadius: 5,
         fontSize: 15,
-        top: 25,
+        top: 10,
         marginLeft: 'auto',
         marginRight: 'auto',
+    },
+    btnText: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        color: '#000000',
+        fontSize: 17.5,
+        fontWeight: 'bold',
+        marginTop: 30,
+        marginBottom: 15,
     },
     explainTitle: {
         color: '#000000',
@@ -105,9 +118,9 @@ export const usingStyles = StyleSheet.create({
         width: 75,
         height: 75,
         backgroundColor: '#9DD6EB',
-        margin: 50,
-        marginTop: 25,
-        marginBottom: 10,
+        margin: 40,
+        marginTop: 40,
+        marginBottom: 15,
     },
     reportText: {
         color: '#000000',
@@ -117,4 +130,16 @@ export const usingStyles = StyleSheet.create({
         paddingBottom: 10,
         textAlign: "center",
     },
+    mg: {
+        marginTop: 10,
+        marginBottom: 7.5,
+    },
+    reportIconSmall: {
+        margin: 0,
+        marginTop: 17.5,
+        marginRight: 2.5,
+        width: 27.5,
+        height: 27.5,
+        backgroundColor: '#9DD6EB',
+    }
   })

@@ -13,7 +13,14 @@ export const chartStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         marginTop: 30,
-        marginBottom: 20,
+        marginBottom: 15,
+    },
+    subtitle: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontWeight: 'bold',
+        fontSize: 17.5,
+        marginBottom: 15,
     },
     positive: {
         marginLeft: 'auto',
@@ -61,6 +68,8 @@ export const chartStyles = StyleSheet.create({
         marginRight: 10,
     },
     concern: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
         fontSize: 17.5,
         fontWeight: 'bold',
         padding: 15,
@@ -84,5 +93,12 @@ export const chartStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontWeight: 'bold',
+    },
+    sentimentData: {
+        fontSize: 15,
+        padding: 15,
+        paddingTop: 2.5,
+        paddingBottom: 2.5,   
+        color: '#000000'
     }
 })
