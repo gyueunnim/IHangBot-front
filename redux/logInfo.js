@@ -13,6 +13,10 @@ const loginState = createSlice({
             state.id = action.payload;
             state.login = true;
         },
+        setLogoutState(state, action) {
+            state.id = '';
+            state.login = false;
+        },
     },
 });
 
@@ -22,4 +26,4 @@ export default configureStore({
     },
 });
 
-export const { setLoginState } = loginState.actions;
+export const { setLoginState, setLogoutState } = loginState.actions;

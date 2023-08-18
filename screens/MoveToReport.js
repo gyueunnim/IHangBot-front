@@ -1,13 +1,13 @@
-import { Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, Image, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CommonActions } from '@react-navigation/routers';
+import { setLogoutState } from '../redux/logInfo';
 import axios from 'axios';
 
 /* css */
 import { loginStyles } from '../css/loginStyles';
 import { commonStyles } from '../css/commonStyle';
-
 
 function MoveToReport({navigation}) {
   const loginState = useSelector((state) => state.loginState);
@@ -19,6 +19,33 @@ function MoveToReport({navigation}) {
   const loginInfo = {
     "username": id, 
     "password": pw,
+  };
+
+  const dispatch = useDispatch();
+
+  const showConfirmation = () => {
+    Alert.alert(
+      '로그아웃',
+      '로그아웃을 하시겠습니까?',
+      [
+        {
+          text: '아니요',
+          style: 'cancel',
+        },
+        {
+          text: '예',
+          onPress: () => {
+            dispatch(setLogoutState());
+            navigation.navigate('Login');
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  function Logout() {
+    showConfirmation();
   };
 
   useEffect(() => {
@@ -78,6 +105,11 @@ function MoveToReport({navigation}) {
       <View>
         <TouchableOpacity onPress={() => requestLogin()}>
           <Text style={(id !== '' && pw !== '') ? commonStyles.active : commonStyles.btn}>로그인</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity onPress={() => {Logout()}}>
+          <Text style={loginStyles.signUp}>로그아웃</Text>
         </TouchableOpacity>
       </View>
     </View>
