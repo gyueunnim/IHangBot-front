@@ -62,6 +62,6 @@ export const commonStyles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
         color: 'white',
-        marginLeft: 44,
+        alignItems: 'center',
       },
 })

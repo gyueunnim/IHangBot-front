@@ -81,7 +81,7 @@ function Report({navigation}) {
     })
     .catch((error) => {
       setLoading(1);
-      console.log(error);
+      // console.log(error);
     });
   }, []);
 
@@ -90,7 +90,9 @@ function Report({navigation}) {
     .then((response) => {
       setName(response.data.data.child_name);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      // console.log(error)
+    });
   });
 
   return (

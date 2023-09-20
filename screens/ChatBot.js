@@ -35,6 +35,8 @@
         const uri = await stopRecording(recording);
         const sttResponse = await stt(uri);
         queryToGPT(sttResponse.text);      
+        // queryToGPT('티라노 사우루스는 내 꿈이야');
+        // queryToGPT('4');
         setUserTextMaking(false);
         setUserChat({ 
           uri: uri,
@@ -49,6 +51,7 @@
     };
 
     const queryToGPT = async (query) => {
+      // console.log(query)
       setChatTextMaking(true);
       setGptChat({text: ''})
       axios.post(`http://13.124.53.159:8079/api/chat/${loginState.id}`, {
@@ -64,7 +67,7 @@
         await handlePlaySound(ttsResponseUri);
       })
       .catch(async (error) => {
-        console.log(error);
+        console.log('GPT 모듈: ', error);
         setChatTextMaking(false);
         const ttsResponseUri = await tts('다시 한번 말해줘!');
         setGptChat({
@@ -80,13 +83,15 @@
         .then((response) => {
           setGptChat({text: `${response.data.data.child_name}! 기다리고 있었어 ^~^\n오늘은 무슨일이 있었니?`})
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          // console.log(error)
+        });
     }, []);
 
     useEffect(() => {
       return sound
         ? () => {
-            console.log('Unloading Sound');
+            // console.log('Unloading Sound');
             sound.unloadAsync();
           }
         : undefined;

@@ -75,7 +75,7 @@ export const usingStyles = StyleSheet.create({
         backgroundColor: '#1c4587',
         borderRadius: 5,
         fontSize: 15,
-        top: 10,
+        top: 40,
         marginLeft: 'auto',
         marginRight: 'auto',
     },

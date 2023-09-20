@@ -34,9 +34,9 @@ export async function stopRecording(recording) {
 }
 
 export async function playSound(uri) {
-  console.log('Loading Sound', uri);
+  // console.log('Loading Sound', uri);
   const { sound } = await Audio.Sound.createAsync({ uri });
-  console.log('Playing Sound');
+  // console.log('Playing Sound');
   await sound.playAsync();
   return sound;
 }

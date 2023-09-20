@@ -100,5 +100,9 @@ export const chartStyles = StyleSheet.create({
         paddingTop: 2.5,
         paddingBottom: 2.5,   
         color: '#000000'
+    },
+    alignCenter: {
+        flex: 1,
+        alignItems: 'center',
     }
 })

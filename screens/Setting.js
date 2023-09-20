@@ -64,7 +64,9 @@ function Setting({navigation}) {
         setAge(response.data.data.child_age);
         setGender(response.data.data.child_gender);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        // console.log(error)
+      });
   }, []);
 
   return (

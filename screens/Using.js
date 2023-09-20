@@ -126,9 +126,10 @@ function Using({navigation}) {
           <View style={usingStyles.mg}>
             <View style={usingStyles.iconBox}>
               <Image source={require('../assets/keyword.png')} style={usingStyles.reportIconSmall} />
-              <Text style={usingStyles.subTitle}>키워드와 관심사 분석</Text>
+              <Text style={usingStyles.subTitle}>관심사 및 대화 주제 분석</Text>
             </View>
-            <Text style={usingStyles.subText}>키워드와 관심사 분석은 하루 단위로 진행됩니다</Text>
+            <Text style={usingStyles.subText}>관심사 분석은 하루 단위로 진행됩니다</Text>
+            <Text style={usingStyles.subText}>대화 주제 분석은 일주일 단위로 진행됩니다</Text>
           </View>
           <View style={usingStyles.mg}>
             <View style={usingStyles.iconBox}>

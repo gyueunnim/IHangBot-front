@@ -2,8 +2,8 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import qs from 'qs';
 
-const clientId = 'r6yms009vl';
-const clientSecret = 'vSGFZ0fpSUaRqfyE2xETvbfzrG6V3QCSyvRhg8Hn';
+const clientId = '2sv6dmy26a';
+const clientSecret = 'd5yaxtiNEGNuH4ZN7m7Io0lFPLjeFeOibeKmEgXn';
 const url = 'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts';
 
 export default async function tts(chatResponse) {
@@ -33,11 +33,11 @@ export default async function tts(chatResponse) {
 			await FileSystem.writeAsStringAsync(fileUri, data, { encoding: FileSystem.EncodingType.Base64 });
 			return fileUri;
 		} catch (error) {
-				console.error(error);
+				// console.error(error);
 				return { text: error };
 		}
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return { text: error };
 	}
 }

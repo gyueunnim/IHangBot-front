@@ -10,7 +10,7 @@ function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestio
   
   return (
     <View>
-      <Text style={chartStyles.title}>이번 주의 주요 검색 키워드 입니다</Text>
+      <Text style={chartStyles.title}>이번 주의 주요 키워드 입니다</Text>
       <View>
         {
           keywords.map((a, i) => {
@@ -76,22 +76,24 @@ function Chart({pieChartData, stackedBarChartData, keywords, concerns, suggestio
       </View>
       <View>
         <Text style={chartStyles.title}>저번 주 대비 감정 추이 비교</Text>
-        <StackedBarChart
-          data={stackedBarChartData}
-          width={350}
-          height={250}
-          chartConfig={{
-              backgroundColor: '#FFFFFF',
-              backgroundGradientFrom: '#FFFFFF', 
-              backgroundGradientTo: '#FFFFFF', 
-              color: (opacity = 1) => `#FFFFFF`,
-              labelColor: (opacity = 1) => `#444444`,
-              propsForLabels: {
-                  fontSize: 15
-              }
-          }}
-          withHorizontalLabels={false}
+        <View style={chartStyles.alignCenter}>
+          <StackedBarChart
+            data={stackedBarChartData}
+            width={350}
+            height={250}
+            chartConfig={{
+                backgroundColor: '#FFFFFF',
+                backgroundGradientFrom: '#FFFFFF', 
+                backgroundGradientTo: '#FFFFFF', 
+                color: (opacity = 1) => `#FFFFFF`,
+                labelColor: (opacity = 1) => `#444444`,
+                propsForLabels: {
+                    fontSize: 15
+                }
+            }}
+            withHorizontalLabels={false}
         />
+        </View>
       </View>
 
       <View>

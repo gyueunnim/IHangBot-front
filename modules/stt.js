@@ -2,8 +2,8 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 import { toByteArray } from 'base64-js';
 
-const clientId = 'r6yms009vl';
-const clientSecret = 'vSGFZ0fpSUaRqfyE2xETvbfzrG6V3QCSyvRhg8Hn';
+const clientId = '2sv6dmy26a';
+const clientSecret = 'd5yaxtiNEGNuH4ZN7m7Io0lFPLjeFeOibeKmEgXn';
 const url = 'https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=Kor';
 
 export default async function stt(fileUri) {
@@ -29,12 +29,12 @@ export default async function stt(fileUri) {
 				});
 				return response.data;
 			} catch (error) {
-				console.error(error);
-				return { text: error };
+				// console.error("1:", error);
+				return { text: '' };
 			}
 		}
 	} catch (error) {
-			console.log(error);
+			// console.log("2: ", error);
 			return { text: error };
 	}
 }
